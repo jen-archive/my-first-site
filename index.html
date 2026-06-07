@@ -5,439 +5,546 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jen-Archive</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Nanum+Myeongjo:wght@400;700&family=DM+Serif+Display:ital@0;1&family=Jost:wght@300;400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Nanum+Myeongjo:wght@400;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --black: #2c2420;
-      --white: #f5e6d3;
-      --gray-light: #e8d5bf;
-      --gray-mid: #b89d84;
-      --gray-dark: #7a6254;
-      --accent: #4a3728;
-      --line: rgba(0,0,0,0.08);
+      --cream:  #f2e8dc;
+      --sand:   #e8ddd0;
+      --stone:  #c8b8a4;
+      --warm:   #8a7060;
+      --ink:    #1e1a16;
+      --dim:    #5a4e44;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; }
 
     body {
-      background: var(--white);
-      color: var(--black);
-      font-family: 'Nanum Myeongjo', serif;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'Jost', sans-serif;
       font-weight: 300;
-      text-align: center;
       overflow-x: hidden;
+      cursor: none;
     }
 
-    /* ── GRAIN OVERLAY ── */
-    body::before {
-      content: '';
+    /* ── CUSTOM CURSOR ── */
+    .cursor {
       position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      width: 8px; height: 8px;
+      background: var(--ink);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 10000;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease, background 0.3s ease;
+    }
+
+    .cursor-ring {
+      position: fixed;
+      width: 36px; height: 36px;
+      border: 1px solid var(--ink);
+      border-radius: 50%;
       pointer-events: none;
       z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.18s ease, width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
       opacity: 0.5;
     }
 
-    /* ── HEADER ── */
-    header {
-      padding: 80px 24px 60px;
-      animation: fadeUp 1s ease both;
+    body.cursor-hover .cursor { width: 48px; height: 48px; background: var(--ink); opacity: 0.12; }
+    body.cursor-hover .cursor-ring { opacity: 0; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 24px 40px;
+      mix-blend-mode: multiply;
     }
 
-    .logo {
+    .nav-brand {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.8rem, 8vw, 5.5rem);
-      font-weight: 300;
-      letter-spacing: 0.18em;
-      line-height: 1;
-      color: var(--black);
-    }
-
-    .logo span {
-      font-style: italic;
-      color: var(--gray-dark);
-    }
-
-    .tagline {
-      margin-top: 20px;
-      font-size: clamp(0.75rem, 2vw, 0.9rem);
-      letter-spacing: 0.25em;
-      color: var(--gray-mid);
-      font-family: 'Jost', sans-serif;
+      font-size: 0.95rem; letter-spacing: 0.3em;
+      color: var(--ink); text-decoration: none;
       text-transform: uppercase;
     }
 
-    /* ── DIVIDER ── */
-    .divider {
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+
+    .nav-links a {
+      font-size: 0.68rem; font-weight: 400;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--warm); text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--ink); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-rows: 1fr auto;
+      padding: 0 40px 48px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-center {
       display: flex;
-      align-items: center;
+      flex-direction: column;
       justify-content: center;
-      gap: 16px;
-      margin: 0 auto;
-      max-width: 320px;
-      padding: 0 24px;
+      align-items: flex-start;
+      padding-top: 100px;
     }
 
-    .divider::before,
-    .divider::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--gray-light);
+    .hero-eyebrow {
+      font-size: 0.68rem; font-weight: 400;
+      letter-spacing: 0.35em; text-transform: uppercase;
+      color: var(--warm);
+      margin-bottom: 24px;
+      animation: fadeUp 1s 0.1s ease both;
     }
 
-    .divider-dot {
-      width: 4px;
-      height: 4px;
-      border-radius: 50%;
-      background: var(--gray-mid);
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(5rem, 16vw, 14rem);
+      font-weight: 300;
+      line-height: 0.88;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      animation: fadeUp 1s 0.2s ease both;
     }
 
-    /* ── MAIN ── */
-    main {
-      max-width: 560px;
-      margin: 0 auto;
-      padding: 0 24px 100px;
+    .hero-title em {
+      font-style: italic;
+      color: var(--warm);
+    }
+
+    .hero-sub {
+      margin-top: 40px;
+      max-width: 340px;
+      font-size: 0.85rem; font-weight: 300;
+      line-height: 1.8; letter-spacing: 0.04em;
+      color: var(--dim);
+      animation: fadeUp 1s 0.35s ease both;
+    }
+
+    .hero-scroll {
+      display: flex; align-items: center; gap: 16px;
+      font-size: 0.62rem; font-weight: 400;
+      letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--stone);
+      animation: fadeUp 1s 0.5s ease both;
+    }
+
+    .hero-scroll-line {
+      width: 48px; height: 1px; background: var(--stone);
+      animation: expandLine 1.2s 0.8s ease both;
+      transform-origin: left;
+    }
+
+    /* ── BIG YEAR ── */
+    .hero-year {
+      position: absolute;
+      bottom: 40px; right: 40px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(4rem, 12vw, 9rem);
+      font-weight: 300;
+      color: var(--sand);
+      line-height: 1;
+      letter-spacing: -0.03em;
+      user-select: none;
+      pointer-events: none;
+      animation: fadeUp 1s 0.6s ease both;
+    }
+
+    /* ── SECTION WRAPPER ── */
+    section { padding: 80px 40px; }
+
+    .s-label {
+      font-size: 0.62rem; font-weight: 500;
+      letter-spacing: 0.35em; text-transform: uppercase;
+      color: var(--stone);
+      margin-bottom: 48px;
+      display: flex; align-items: center; gap: 16px;
+    }
+
+    .s-label::after {
+      content: ''; flex: 1; max-width: 60px;
+      height: 1px; background: var(--stone);
     }
 
     /* ── ABOUT ── */
     .about {
-      padding: 56px 0 48px;
-      animation: fadeUp 1s 0.15s ease both;
+      max-width: 800px; margin: 0 auto;
+      border-top: 1px solid var(--sand);
     }
 
-    .section-label {
-      font-family: 'Jost', sans-serif;
-      font-size: 0.82rem;
-      letter-spacing: 0.3em;
-      color: var(--gray-mid);
-      text-transform: uppercase;
-      margin-bottom: 20px;
+    .about-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
     }
 
-    .about-text {
+    .about-quote {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.1rem, 3.5vw, 1.35rem);
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
       font-weight: 300;
-      line-height: 1.9;
-      color: var(--gray-dark);
+      line-height: 1.35;
+      letter-spacing: -0.01em;
+      color: var(--ink);
     }
 
-    .about-text em {
-      font-style: italic;
-      color: var(--black);
+    .about-quote em { font-style: italic; color: var(--warm); }
+
+    .about-desc {
+      font-family: 'Nanum Myeongjo', serif;
+      font-size: 0.95rem;
+      line-height: 2;
+      color: var(--dim);
+      padding-top: 8px;
     }
 
     /* ── INTERESTS ── */
     .interests {
-      padding: 40px 0;
-      animation: fadeUp 1s 0.3s ease both;
+      background: var(--ink);
+      padding: 80px 40px;
     }
 
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 20px;
+    .interests .s-label { color: var(--stone); }
+    .interests .s-label::after { background: var(--warm); }
+
+    .icard-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--warm);
+      border: 1px solid var(--warm);
     }
 
-    .tag {
-      padding: 8px 18px;
-      border: 1px solid var(--gray-light);
-      font-size: 0.95rem;
-      letter-spacing: 0.12em;
-      color: var(--gray-dark);
-      font-family: 'Nanum Myeongjo', serif;
-      background: transparent;
-      transition: all 0.3s ease;
-      cursor: default;
-    }
-
-    .tag:hover {
-      border-color: var(--black);
-      color: var(--black);
-      background: var(--black);
-      color: var(--white);
-    }
-
-    .tag-link {
+    .icard {
+      background: var(--ink);
+      padding: 48px 36px 40px;
+      display: flex; flex-direction: column;
+      gap: 16px;
       text-decoration: none;
-      cursor: pointer;
+      cursor: none;
+      transition: background 0.4s ease;
       position: relative;
+      overflow: hidden;
     }
 
-    .tag-link::after {
-      content: ' →';
-      font-size: 0.75rem;
-      opacity: 0.6;
+    .icard::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: var(--warm);
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    /* ── IDENTITY CARD ── */
-    .identity {
-      margin: 48px 0;
-      padding: 40px 32px;
-      border: 1px solid var(--gray-light);
-      position: relative;
-      animation: fadeUp 1s 0.45s ease both;
+    .icard:hover::before { transform: scaleY(1); }
+
+    .icard:hover .icard-kanji,
+    .icard:hover .icard-en,
+    .icard:hover .icard-ko { color: var(--ink); }
+
+    .icard-num {
+      font-size: 0.6rem; letter-spacing: 0.25em;
+      color: var(--warm); font-weight: 400;
+      position: relative; z-index: 1;
+      transition: color 0.4s ease;
     }
 
-    .identity::before {
-      content: '✦';
-      position: absolute;
-      top: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--white);
-      padding: 0 10px;
-      font-size: 0.75rem;
-      color: var(--gray-mid);
+    .icard:hover .icard-num { color: var(--ink); }
+
+    .icard-kanji {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.5rem; font-weight: 300;
+      line-height: 1; color: var(--cream);
+      position: relative; z-index: 1;
+      transition: color 0.4s ease;
     }
 
-    .identity-row {
-      display: flex;
-      align-items: flex-start;
-      gap: 20px;
-      padding: 14px 0;
-      border-bottom: 1px solid var(--gray-light);
-      text-align: left;
+    .icard-en {
+      font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--stone);
+      position: relative; z-index: 1;
+      transition: color 0.4s ease;
+      margin-top: auto;
     }
 
-    .identity-row:last-child { border-bottom: none; }
+    .icard-ko {
+      font-family: 'Nanum Myeongjo', serif;
+      font-size: 1.1rem; color: var(--cream);
+      position: relative; z-index: 1;
+      transition: color 0.4s ease;
+      line-height: 1.5;
+    }
+
+    .icard-arrow {
+      position: absolute; bottom: 36px; right: 36px;
+      font-size: 1.2rem; color: var(--warm);
+      opacity: 0;
+      transform: translate(-8px, 8px);
+      transition: all 0.4s ease;
+      z-index: 1;
+    }
+
+    .icard:hover .icard-arrow {
+      opacity: 1;
+      transform: translate(0, 0);
+      color: var(--ink);
+    }
+
+    /* ── IDENTITY ── */
+    .identity-section {
+      max-width: 800px; margin: 0 auto;
+      border-top: 1px solid var(--sand);
+    }
+
+    .identity-grid {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+    }
+
+    .id-row {
+      display: contents;
+    }
+
+    .id-row > * {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--sand);
+    }
+
+    .id-row:last-child > * { border-bottom: none; }
 
     .id-label {
-      font-family: 'Jost', sans-serif;
-      letter-spacing: 0.2em;
-      color: var(--gray-mid);
-      text-transform: uppercase;
-      min-width: 64px;
-      padding-top: 2px;
-      flex-shrink: 0;
+      font-size: 0.65rem; font-weight: 500;
+      letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--stone);
+      padding-right: 24px;
     }
 
     .id-value {
-      font-size: 0.9rem;
-      color: var(--black);
-      line-height: 1.6;
+      font-family: 'Nanum Myeongjo', serif;
+      font-size: 1rem; color: var(--ink);
+      line-height: 1.7;
+      display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
     }
 
+    /* career btn */
     .career-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      margin-left: 10px;
-      padding: 3px 10px;
-      border: 1px solid var(--gray-mid);
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 4px 12px;
+      border: 1px solid var(--stone);
       font-family: 'Jost', sans-serif;
-      font-size: 0.65rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--gray-dark);
-      text-decoration: none;
-      vertical-align: middle;
+      font-size: 0.62rem; font-weight: 400;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--warm); text-decoration: none;
       transition: all 0.3s ease;
     }
 
     .career-btn:hover {
-      border-color: var(--black);
-      background: var(--black);
-      color: var(--white);
+      border-color: var(--ink);
+      background: var(--ink); color: var(--cream);
     }
 
     /* ── CONTACT ── */
-    .contact {
-      padding: 40px 0;
-      animation: fadeUp 1s 0.6s ease both;
+    .contact-section {
+      max-width: 800px; margin: 0 auto;
+      border-top: 1px solid var(--sand);
     }
 
-    .email-wrapper {
-      margin-top: 20px;
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      padding: 14px 28px;
-      border: 1px solid var(--gray-light);
-      transition: all 0.3s ease;
-      cursor: pointer;
+    .contact-row {
+      display: flex; justify-content: space-between;
+      align-items: center; flex-wrap: wrap; gap: 24px;
     }
 
-    .email-wrapper:hover {
-      border-color: var(--black);
-      background: var(--black);
+    .contact-big {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 6vw, 4rem);
+      font-weight: 300; letter-spacing: -0.01em;
+      color: var(--ink); line-height: 1;
     }
 
-    .email-wrapper:hover .email-icon,
-    .email-wrapper:hover .email-placeholder {
-      color: var(--white);
+    .contact-links {
+      display: flex; flex-direction: column; gap: 12px;
+      align-items: flex-end;
     }
 
-    .email-icon {
-      font-size: 1rem;
-      color: var(--gray-mid);
-      transition: color 0.3s ease;
+    .contact-link {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 0.75rem; font-weight: 400;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--dim); text-decoration: none;
+      transition: color 0.3s;
     }
 
-    .email-placeholder {
-      font-family: 'Jost', sans-serif;
-      font-size: 0.88rem;
-      letter-spacing: 0.15em;
-      color: var(--gray-dark);
-      transition: color 0.3s ease;
-    }
+    .contact-link:hover { color: var(--ink); }
 
-    /* ── SOCIAL ── */
-    .social {
-      padding: 32px 0 8px;
-      animation: fadeUp 1s 0.7s ease both;
-    }
-
-    .social-links {
-      display: inline-flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 20px;
-    }
-
-    .instagram-link {
-      margin-top: 20px;
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      padding: 14px 28px;
-      border: 1px solid var(--gray-light);
-      text-decoration: none;
-      transition: all 0.3s ease;
-    }
-
-    .instagram-link:hover {
-      border-color: var(--black);
-      background: var(--black);
-    }
-
-    .instagram-link:hover .ig-icon,
-    .instagram-link:hover .ig-handle {
-      color: var(--white);
-    }
-
-    .ig-icon {
-      font-size: 1rem;
-      color: var(--gray-mid);
-      transition: color 0.3s ease;
-    }
-
-    .ig-handle {
-      font-family: 'Jost', sans-serif;
-      font-size: 0.88rem;
-      letter-spacing: 0.15em;
-      color: var(--gray-dark);
-      transition: color 0.3s ease;
-    }
+    .contact-link svg { transition: transform 0.3s; }
+    .contact-link:hover svg { transform: translate(3px, -3px); }
 
     /* ── FOOTER ── */
     footer {
-      padding: 40px 24px;
-      border-top: 1px solid var(--gray-light);
-      animation: fadeUp 1s 0.85s ease both;
+      border-top: 1px solid var(--sand);
+      padding: 28px 40px;
+      display: flex; justify-content: space-between;
+      align-items: center; flex-wrap: wrap; gap: 12px;
     }
 
-    .footer-text {
+    .footer-quote {
       font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: 1rem;
-      color: var(--gray-mid);
-      letter-spacing: 0.05em;
+      font-style: italic; font-size: 0.95rem;
+      color: var(--stone);
     }
+
+    .footer-right {
+      display: flex; gap: 28px; align-items: center;
+    }
+
+    .footer-right a {
+      font-size: 0.65rem; font-weight: 400;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--stone); text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-right a:hover { color: var(--ink); }
 
     .footer-copy {
-      margin-top: 10px;
-      font-family: 'Jost', sans-serif;
-      font-size: 0.75rem;
-      letter-spacing: 0.2em;
-      color: var(--gray-light);
-      text-transform: uppercase;
-    }
-
-    /* ── DECORATIVE NUMBERS ── */
-    .section-number {
-      display: block;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 5rem;
-      font-weight: 300;
-      color: var(--gray-light);
-      line-height: 1;
-      margin-bottom: -16px;
-      pointer-events: none;
-      user-select: none;
+      font-size: 0.6rem; letter-spacing: 0.15em;
+      color: var(--sand); text-transform: uppercase;
     }
 
     /* ── ANIMATIONS ── */
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
+      from { opacity: 0; transform: translateY(28px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
+    @keyframes expandLine {
+      from { transform: scaleX(0); }
+      to   { transform: scaleX(1); }
+    }
+
     /* ── MOBILE ── */
-    @media (max-width: 480px) {
-      header { padding: 60px 24px 48px; }
-      .identity { padding: 28px 20px; }
-      .identity-row { gap: 14px; }
-      .id-label { min-width: 56px; }
+    @media (max-width: 640px) {
+      nav { padding: 20px 24px; }
+      .nav-links { gap: 20px; }
+      .hero { padding: 0 24px 40px; }
+      .hero-title { font-size: clamp(4rem, 18vw, 7rem); }
+      section { padding: 60px 24px; }
+      .about-body { grid-template-columns: 1fr; gap: 32px; }
+      .icard-grid { grid-template-columns: 1fr; }
+      .icard { padding: 36px 28px 32px; }
+      .identity-grid { grid-template-columns: 120px 1fr; }
+      .contact-row { flex-direction: column; align-items: flex-start; }
+      .contact-links { align-items: flex-start; }
+      footer { padding: 24px; flex-direction: column; align-items: flex-start; gap: 16px; }
+      .footer-right { flex-wrap: wrap; gap: 16px; }
+      .hero-year { display: none; }
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1 class="logo">Jen<span>-</span>Archive</h1>
-    <p class="tagline">A precious space of someone who loves beautiful things</p>
-  </header>
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
 
-  <div class="divider"><span class="divider-dot"></span></div>
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-brand">Jen-Archive</a>
+    <ul class="nav-links">
+      <li><a href="jen-photo.html">Photo</a></li>
+      <li><a href="jen-career.html">Career</a></li>
+    </ul>
+  </nav>
 
-  <main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-center">
+      <p class="hero-eyebrow">Personal Archive · Seoul</p>
+      <h1 class="hero-title">Jen<br><em>Archive</em></h1>
+      <p class="hero-sub">아름다운 것들을 사랑하는 사람의<br />소중한 공간 — 항상 새로운 것에 도전하고<br />성취감을 즐기는 웹기획자.</p>
+    </div>
+    <div class="hero-scroll">
+      <span class="hero-scroll-line"></span>
+      Scroll
+    </div>
+    <span class="hero-year">2026</span>
+  </section>
 
-    <!-- ABOUT -->
-    <section class="about">
-      <p class="section-label">About</p>
-      <p class="about-text">
-        아름다운 것들을 사랑하는 사람의<br />
-        <em>소중한 공간</em>입니다.<br /><br />
+  <!-- ABOUT -->
+  <section class="about" style="animation: fadeUp 0.8s 0.1s ease both;">
+    <p class="s-label">About</p>
+    <div class="about-body">
+      <h2 class="about-quote">
+        아름다운 것들을<br />
+        사랑하는<br />
+        <em>사람의 공간.</em>
+      </h2>
+      <div class="about-desc">
+        25년 넘게 UI/UX 서비스 기획자로 살아왔어요.<br />
+        금융·이커머스·B2B 시스템을 오가며<br />
         항상 새로운 것에 도전하고,<br />
-        성취감을 즐기는 <em>웹기획자</em>.
-      </p>
-    </section>
-
-    <div class="divider"><span class="divider-dot"></span></div>
-
-    <!-- INTERESTS -->
-    <section class="interests">
-      <p class="section-label">Interests</p>
-      <div class="tags">
-        <span class="tag">📚 책</span>
-        <a href="jen-photo.html" class="tag tag-link">📷 사진</a>
-        <span class="tag">📈 투자</span>
-        <span class="tag">🎬 영화</span>
-        <span class="tag">🐾 동물</span>
-        <span class="tag">🍽 맛있는 음식</span>
-        <span class="tag">✈️ 여행</span>
+        성취감 속에서 성장해왔습니다.<br /><br />
+        이 공간은 일과 일상,<br />
+        그 사이 어딘가의 기록입니다.
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- IDENTITY -->
-    <div class="identity">
-      <div class="identity-row">
+  <!-- INTERESTS -->
+  <section class="interests">
+    <p class="s-label" style="color:var(--stone);">Interests</p>
+    <div class="icard-grid">
+
+      <div class="icard">
+        <span class="icard-num">01</span>
+        <span class="icard-kanji">好</span>
+        <span class="icard-ko">책 · 영화</span>
+        <span class="icard-en">Jen · Literature & Film</span>
+      </div>
+
+      <a href="jen-photo.html" class="icard" style="cursor:none;">
+        <span class="icard-num">02</span>
+        <span class="icard-kanji">樂</span>
+        <span class="icard-ko">여행 · 사진</span>
+        <span class="icard-en">Jen · Travel & Photo</span>
+        <span class="icard-arrow">↗</span>
+      </a>
+
+      <div class="icard">
+        <span class="icard-num">03</span>
+        <span class="icard-kanji">味</span>
+        <span class="icard-ko">맛집 · 요리</span>
+        <span class="icard-en">Jen · Food & Cooking</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- IDENTITY -->
+  <section class="identity-section" style="padding: 80px 40px; animation: fadeUp 0.8s ease both;">
+    <p class="s-label">Identity</p>
+    <div class="identity-grid">
+
+      <div class="id-row">
         <span class="id-label">Name</span>
         <span class="id-value">Jen</span>
       </div>
-      <div class="identity-row">
+      <div class="id-row">
         <span class="id-label">Role</span>
-        <span class="id-value">웹기획자 · Web Planner
+        <span class="id-value">
+          웹기획자 · Web Planner
           <a href="jen-career.html" class="career-btn">
-            <svg width="11" height="11" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg width="10" height="10" viewBox="0 0 14 14" fill="none">
               <rect x="1" y="2" width="12" height="10" rx="1" stroke="currentColor" stroke-width="1.4" fill="none"/>
               <line x1="4" y1="5.5" x2="10" y2="5.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
               <line x1="4" y1="8" x2="8" y2="8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
@@ -446,42 +553,94 @@
           </a>
         </span>
       </div>
-      <div class="identity-row">
+      <div class="id-row">
         <span class="id-label">Focus</span>
         <span class="id-value">UI/UX · Service Planning · New Challenges</span>
       </div>
-      <div class="identity-row">
+      <div class="id-row">
         <span class="id-label">Loves</span>
         <span class="id-value">아름다운 것들 · Beautiful Things</span>
       </div>
+
     </div>
+  </section>
 
-    <div class="divider"><span class="divider-dot"></span></div>
-
-    <!-- CONTACT -->
-    <section class="contact">
-      <p class="section-label">Contact</p>
-      <div class="email-wrapper">
-        <span class="email-icon">✉</span>
-        <span class="email-placeholder">your@email.com</span>
+  <!-- CONTACT -->
+  <section class="contact-section" style="padding: 80px 40px;">
+    <p class="s-label">Contact</p>
+    <div class="contact-row">
+      <h3 class="contact-big">Let's<br /><em style="font-style:italic; color:var(--warm);">connect.</em></h3>
+      <div class="contact-links">
+        <a href="mailto:your@email.com" class="contact-link">
+          <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+            <rect x="1" y="3" width="14" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3" fill="none"/>
+            <path d="M1 4.5l7 5 7-5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+          </svg>
+          your@email.com
+        </a>
+        <a href="https://instagram.com/" target="_blank" class="contact-link">
+          <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+            <rect x="1" y="1" width="14" height="14" rx="4" stroke="currentColor" stroke-width="1.3" fill="none"/>
+            <circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.3" fill="none"/>
+            <circle cx="12" cy="4" r="0.8" fill="currentColor"/>
+          </svg>
+          @your_instagram
+        </a>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- SOCIAL -->
-    <section class="social">
-      <p class="section-label">Instagram</p>
-      <a href="https://instagram.com/" target="_blank" class="instagram-link">
-        <span class="ig-icon">◎</span>
-        <span class="ig-handle">@your_instagram</span>
-      </a>
-    </section>
-
-  </main>
-
+  <!-- FOOTER -->
   <footer>
-    <p class="footer-text">"Always challenging, always growing."</p>
-    <p class="footer-copy">© 2026 Jen-Archive · All rights reserved</p>
+    <p class="footer-quote">"Always challenging, always growing."</p>
+    <div class="footer-right">
+      <a href="jen-photo.html">Photo</a>
+      <a href="jen-career.html">Career</a>
+      <span class="footer-copy">© 2026 Jen-Archive</span>
+    </div>
   </footer>
+
+  <script>
+    // ── CURSOR ──────────────────────────────────────────────
+    const cursor = document.getElementById('cursor');
+    const ring   = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.left = mx + 'px';
+      cursor.style.top  = my + 'px';
+    });
+
+    function animateRing() {
+      rx += (mx - rx) * 0.12;
+      ry += (my - ry) * 0.12;
+      ring.style.left = rx + 'px';
+      ring.style.top  = ry + 'px';
+      requestAnimationFrame(animateRing);
+    }
+    animateRing();
+
+    document.querySelectorAll('a, .icard, button').forEach(el => {
+      el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+      el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+    });
+
+    // ── SCROLL REVEAL ────────────────────────────────────────
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.animation = 'fadeUp 0.8s ease both';
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.about, .identity-section, .contact-section').forEach(el => {
+      el.style.opacity = '0';
+      observer.observe(el);
+    });
+  </script>
 
 </body>
 </html>
