@@ -5,16 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jen-Archive</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Serif+KR:wght@300;400&family=Space+Mono&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Nanum+Myeongjo:wght@400;700&family=DM+Serif+Display:ital@0;1&family=Jost:wght@300;400&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --black: #0e0e0e;
-      --white: #f7f5f2;
-      --gray-light: #e8e5e0;
-      --gray-mid: #b0aba3;
-      --gray-dark: #6b6660;
-      --accent: #2a2a2a;
-      --line: rgba(0,0,0,0.1);
+      --black: #2c2420;
+      --white: #f5e6d3;
+      --gray-light: #e8d5bf;
+      --gray-mid: #b89d84;
+      --gray-dark: #7a6254;
+      --accent: #4a3728;
+      --line: rgba(0,0,0,0.08);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -24,7 +24,7 @@
     body {
       background: var(--white);
       color: var(--black);
-      font-family: 'Noto Serif KR', serif;
+      font-family: 'Nanum Myeongjo', serif;
       font-weight: 300;
       text-align: center;
       overflow-x: hidden;
@@ -66,7 +66,7 @@
       font-size: clamp(0.75rem, 2vw, 0.9rem);
       letter-spacing: 0.25em;
       color: var(--gray-mid);
-      font-family: 'Space Mono', monospace;
+      font-family: 'Jost', sans-serif;
       text-transform: uppercase;
     }
 
@@ -110,7 +110,7 @@
     }
 
     .section-label {
-      font-family: 'Space Mono', monospace;
+      font-family: 'Jost', sans-serif;
       font-size: 0.68rem;
       letter-spacing: 0.3em;
       color: var(--gray-mid);
@@ -151,7 +151,7 @@
       font-size: 0.8rem;
       letter-spacing: 0.12em;
       color: var(--gray-dark);
-      font-family: 'Noto Serif KR', serif;
+      font-family: 'Nanum Myeongjo', serif;
       background: transparent;
       transition: all 0.3s ease;
       cursor: default;
@@ -197,8 +197,7 @@
     .identity-row:last-child { border-bottom: none; }
 
     .id-label {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.62rem;
+      font-family: 'Jost', sans-serif;
       letter-spacing: 0.2em;
       color: var(--gray-mid);
       text-transform: uppercase;
@@ -247,7 +246,47 @@
     }
 
     .email-placeholder {
-      font-family: 'Space Mono', monospace;
+      font-family: 'Jost', sans-serif;
+      letter-spacing: 0.15em;
+      color: var(--gray-dark);
+      transition: color 0.3s ease;
+    }
+
+    /* ── SOCIAL ── */
+    .social {
+      padding: 32px 0 8px;
+      animation: fadeUp 1s 0.7s ease both;
+    }
+
+    .instagram-link {
+      margin-top: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 28px;
+      border: 1px solid var(--gray-light);
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .instagram-link:hover {
+      border-color: var(--black);
+      background: var(--black);
+    }
+
+    .instagram-link:hover .ig-icon,
+    .instagram-link:hover .ig-handle {
+      color: var(--white);
+    }
+
+    .ig-icon {
+      font-size: 1rem;
+      color: var(--gray-mid);
+      transition: color 0.3s ease;
+    }
+
+    .ig-handle {
+      font-family: 'Jost', sans-serif;
       font-size: 0.75rem;
       letter-spacing: 0.15em;
       color: var(--gray-dark);
@@ -258,7 +297,7 @@
     footer {
       padding: 40px 24px;
       border-top: 1px solid var(--gray-light);
-      animation: fadeUp 1s 0.75s ease both;
+      animation: fadeUp 1s 0.85s ease both;
     }
 
     .footer-text {
@@ -271,8 +310,7 @@
 
     .footer-copy {
       margin-top: 10px;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.6rem;
+      font-family: 'Jost', sans-serif;
       letter-spacing: 0.2em;
       color: var(--gray-light);
       text-transform: uppercase;
@@ -373,6 +411,15 @@
         <span class="email-icon">✉</span>
         <span class="email-placeholder">your@email.com</span>
       </div>
+    </section>
+
+    <!-- SOCIAL -->
+    <section class="social">
+      <p class="section-label">Instagram</p>
+      <a href="https://instagram.com/" target="_blank" class="instagram-link">
+        <span class="ig-icon">◎</span>
+        <span class="ig-handle">@your_instagram</span>
+      </a>
     </section>
 
   </main>
