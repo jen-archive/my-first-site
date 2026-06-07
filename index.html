@@ -164,6 +164,18 @@
       color: var(--white);
     }
 
+    .tag-link {
+      text-decoration: none;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .tag-link::after {
+      content: ' →';
+      font-size: 0.75rem;
+      opacity: 0.6;
+    }
+
     /* ── IDENTITY CARD ── */
     .identity {
       margin: 48px 0;
@@ -375,7 +387,7 @@
       <p class="section-label">Interests</p>
       <div class="tags">
         <span class="tag">📚 책</span>
-        <span class="tag">📷 사진</span>
+        <a href="jen-photo.html" class="tag tag-link">📷 사진</a>
         <span class="tag">📈 투자</span>
         <span class="tag">🎬 영화</span>
         <span class="tag">🐾 동물</span>
