@@ -224,6 +224,29 @@
       line-height: 1.6;
     }
 
+    .career-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin-left: 10px;
+      padding: 3px 10px;
+      border: 1px solid var(--gray-mid);
+      font-family: 'Jost', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gray-dark);
+      text-decoration: none;
+      vertical-align: middle;
+      transition: all 0.3s ease;
+    }
+
+    .career-btn:hover {
+      border-color: var(--black);
+      background: var(--black);
+      color: var(--white);
+    }
+
     /* ── CONTACT ── */
     .contact {
       padding: 40px 0;
@@ -269,6 +292,14 @@
     .social {
       padding: 32px 0 8px;
       animation: fadeUp 1s 0.7s ease both;
+    }
+
+    .social-links {
+      display: inline-flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
     }
 
     .instagram-link {
@@ -404,7 +435,16 @@
       </div>
       <div class="identity-row">
         <span class="id-label">Role</span>
-        <span class="id-value">웹기획자 · Web Planner</span>
+        <span class="id-value">웹기획자 · Web Planner
+          <a href="jen-career.html" class="career-btn">
+            <svg width="11" height="11" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="1" y="2" width="12" height="10" rx="1" stroke="currentColor" stroke-width="1.4" fill="none"/>
+              <line x1="4" y1="5.5" x2="10" y2="5.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+              <line x1="4" y1="8" x2="8" y2="8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+            </svg>
+            Career
+          </a>
+        </span>
       </div>
       <div class="identity-row">
         <span class="id-label">Focus</span>
@@ -433,15 +473,6 @@
       <a href="https://instagram.com/" target="_blank" class="instagram-link">
         <span class="ig-icon">◎</span>
         <span class="ig-handle">@your_instagram</span>
-      </a>
-    </section>
-
-    <!-- PHOTO LINK -->
-    <section class="social" style="padding-top: 8px;">
-      <p class="section-label">Universe</p>
-      <a href="jen-photo.html" class="instagram-link" style="text-decoration:none;">
-        <span class="ig-icon">📷</span>
-        <span class="ig-handle">Jen-Photo →</span>
       </a>
     </section>
 
