@@ -5,21 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jen · Career</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Nanum+Myeongjo:wght@400;700&family=Jost:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
   <style>
+    /* ── TOKENS ──────────────────────────────────────────── */
     :root {
-      --cream:  #f2e8dc;
-      --sand:   #e8ddd0;
-      --stone:  #c8b8a4;
-      --warm:   #8a7060;
-      --ink:    #1e1a16;
-      --dim:    #5a4e44;
-      --hl:     #9a5a28;
-      /* table surfaces — slightly off cream for rhythm */
-      --row-a:  #f2e8dc;   /* == cream */
-      --row-b:  #ede0d0;   /* one step darker */
-      --row-h:  #e4d5c0;   /* hover */
-      --border: #d8c8b4;
+      --cream:   #f3ede4;
+      --sand:    #e9e0d4;
+      --stone:   #c4b5a5;
+      --warm:    #8a6f58;
+      --ink:     #1c1916;
+      --dim:     #5a4e44;
+      --hl:      #9a5a28;
+      --border:  #ddd0c0;
+      --row-a:   #faf7f3;
+      --row-b:   #f4efe8;
+      --row-h:   #ece5db;
+      --white:   #ffffff;
+
+      --f-display: 'Fraunces', serif;
+      --f-body:    'Plus Jakarta Sans', sans-serif;
+      --f-mono:    'DM Mono', monospace;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -28,7 +33,7 @@
     body {
       background: var(--cream);
       color: var(--ink);
-      font-family: 'Jost', sans-serif;
+      font-family: var(--f-body);
       font-weight: 300;
       overflow-x: hidden;
       min-height: 100vh;
@@ -36,7 +41,7 @@
       cursor: none;
     }
 
-    /* ── CURSOR ── */
+    /* ── CURSOR ──────────────────────────────────────────── */
     .cursor {
       position: fixed; width: 8px; height: 8px;
       background: var(--ink); border-radius: 50%;
@@ -55,66 +60,63 @@
     body.cursor-hover .cursor { width: 44px; height: 44px; background: var(--ink); opacity: 0.1; }
     body.cursor-hover .cursor-ring { opacity: 0; }
 
-    /* ── NAV ── */
+    /* ── NAV ─────────────────────────────────────────────── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; justify-content: space-between; align-items: center;
-      padding: 24px 40px;
-      mix-blend-mode: multiply;
+      padding: 24px 48px;
+      background: transparent;
     }
     .nav-brand {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 0.95rem; letter-spacing: 0.3em;
+      font-family: var(--f-display);
+      font-size: 1rem; font-weight: 400;
+      letter-spacing: 0.18em;
       color: var(--ink); text-decoration: none; text-transform: uppercase;
     }
-    .nav-brand span { font-style: italic; color: var(--warm); }
+    .nav-brand em { font-style: italic; color: var(--warm); }
     .nav-links { display: flex; gap: 32px; list-style: none; }
     .nav-links a {
       font-size: 0.68rem; font-weight: 400;
-      letter-spacing: 0.2em; text-transform: uppercase;
+      letter-spacing: 0.18em; text-transform: uppercase;
       color: var(--warm); text-decoration: none; transition: color 0.3s;
     }
     .nav-links a:hover { color: var(--ink); }
     .nav-links a.active { color: var(--ink); font-weight: 500; }
 
-    /* ── HERO ── */
+    /* ── HERO ────────────────────────────────────────────── */
     .hero {
-      min-height: 56vh;
+      min-height: 58vh;
       display: flex; flex-direction: column;
       justify-content: flex-end;
-      padding: 0 40px 52px;
+      padding: 100px 48px 56px;
       border-bottom: 1px solid var(--border);
       position: relative; overflow: hidden;
     }
     .hero-eyebrow {
-      font-size: 0.65rem; font-weight: 400;
-      letter-spacing: 0.35em; text-transform: uppercase;
-      color: var(--warm); margin-bottom: 20px;
+      font-size: 0.63rem; font-weight: 500;
+      letter-spacing: 0.32em; text-transform: uppercase;
+      color: var(--warm); margin-bottom: 18px;
       animation: fadeUp 0.8s 0.1s ease both;
     }
     .hero-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(3.2rem, 9vw, 4.875rem);
-      font-weight: 300; line-height: 0.9;
+      font-family: var(--f-display);
+      font-size: clamp(3rem, 8.5vw, 5rem);
+      font-weight: 300; line-height: 0.92;
       letter-spacing: -0.02em; color: var(--ink);
       animation: fadeUp 0.8s 0.2s ease both;
     }
     .hero-title em { font-style: italic; color: var(--warm); }
     .hero-meta {
       margin-top: 28px;
-      font-family: 'Jost', sans-serif;
       font-size: 0.82rem; font-weight: 300;
       color: var(--dim); line-height: 1.7;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.03em;
       animation: fadeUp 0.8s 0.35s ease both;
     }
-
-    /* ── SUMMARY STRIP ── */
     .summary-strip {
-      position: absolute; bottom: 52px; right: 40px;
+      position: absolute; bottom: 56px; right: 48px;
       display: flex; gap: 0;
       border: 1px solid var(--border);
-      background: transparent;
       animation: fadeUp 0.8s 0.45s ease both;
     }
     .strip-item {
@@ -123,179 +125,366 @@
     }
     .strip-item:last-child { border-right: none; }
     .strip-num {
-      font-family: 'DM Mono', monospace;
-      font-size: 1.5rem; font-weight: 400;
+      font-family: var(--f-mono);
+      font-size: 1.45rem; font-weight: 400;
       color: var(--ink); line-height: 1;
     }
     .strip-label {
-      margin-top: 4px; font-size: 0.6rem; font-weight: 500;
+      margin-top: 5px; font-size: 0.58rem; font-weight: 500;
       letter-spacing: 0.18em; text-transform: uppercase; color: var(--stone);
     }
 
-    /* ── MAIN ── */
-    main { padding: 56px 40px 80px; }
+    /* ── MAIN (DESKTOP) ──────────────────────────────────── */
+    main { padding: 60px 48px 80px; }
 
-    /* ── SECTION ── */
-    .career-section { margin-bottom: 64px; animation: fadeUp 0.8s 0.2s ease both; }
+    .career-section { margin-bottom: 68px; animation: fadeUp 0.8s 0.2s ease both; }
     .career-section:last-child { margin-bottom: 0; }
 
     .section-header {
       display: flex; align-items: center;
-      gap: 14px; margin-bottom: 20px;
+      gap: 14px; margin-bottom: 22px;
       padding-bottom: 14px;
       border-bottom: 1px solid var(--border);
     }
     .section-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.5rem; font-weight: 400;
-      letter-spacing: 0.04em; color: var(--ink);
+      font-family: var(--f-display);
+      font-size: 1.45rem; font-weight: 400;
+      letter-spacing: 0.03em; color: var(--ink);
     }
     .section-range {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.72rem; color: var(--stone);
+      font-family: var(--f-mono);
+      font-size: 0.7rem; color: var(--stone);
     }
     .section-count {
       margin-left: auto;
-      font-family: 'DM Mono', monospace;
-      font-size: 0.68rem; color: var(--stone);
+      font-family: var(--f-mono);
+      font-size: 0.66rem; color: var(--stone);
     }
 
-    /* ── TABLE ── */
+    /* ── TABLE (DESKTOP) ─────────────────────────────────── */
     .table-wrap { width: 100%; overflow-x: auto; }
 
     table {
       width: 100%; border-collapse: collapse;
       min-width: 800px;
-      border: 1px solid #e2deda;
+      border: 1px solid var(--border);
     }
-
     thead th {
       padding: 10px 16px;
-      font-family: 'Jost', sans-serif;
-      font-size: 0.58rem; font-weight: 500;
+      font-size: 0.57rem; font-weight: 500;
       letter-spacing: 0.22em; text-transform: uppercase;
-      color: #aaa8a4; background: #f0ede8;
-      border-bottom: 1px solid #e2deda;
+      color: #b0aaa4; background: #ede8e0;
+      border-bottom: 1px solid var(--border);
       text-align: left; white-space: nowrap;
     }
     thead th.center { text-align: center; }
 
-    tbody tr { border-bottom: 1px solid #eae7e2; transition: background 0.15s; }
+    tbody tr { border-bottom: 1px solid #e8e2da; transition: background 0.15s; }
     tbody tr:last-child { border-bottom: none; }
-    tbody tr:nth-child(odd)  { background: #faf9f7; }
-    tbody tr:nth-child(even) { background: #f4f2ee; }
-    tbody tr:hover           { background: #ece9e4; }
+    tbody tr:nth-child(odd)  { background: var(--row-a); }
+    tbody tr:nth-child(even) { background: var(--row-b); }
+    tbody tr:hover           { background: var(--row-h); }
 
-    td {
-      padding: 11px 16px;
-      vertical-align: middle; line-height: 1.55;
-    }
+    td { padding: 11px 16px; vertical-align: middle; line-height: 1.55; }
 
     .col-num {
       width: 32px; text-align: center;
-      font-family: 'Jost', sans-serif;
-      font-size: 0.62rem; font-weight: 300;
-      color: #c8c4be;
+      font-size: 0.6rem; font-weight: 300; color: #c4beb8;
     }
     .col-proj {
-      width: 360px; min-width: 280px;
-      font-family: 'Jost', sans-serif;
-      font-size: 0.82rem; font-weight: 600;
-      color: #2a2a28; line-height: 1.45;
+      width: 340px; min-width: 260px;
+      font-size: 0.82rem; font-weight: 500;
+      color: #2a2824; line-height: 1.45;
     }
     .col-proj small {
       display: block;
-      font-family: 'Jost', sans-serif;
-      font-weight: 300; font-size: 0.72rem;
-      color: #b8b4ae; margin-top: 2px;
+      font-weight: 300; font-size: 0.7rem;
+      color: #b4b0aa; margin-top: 2px;
     }
     .col-client {
-      width: 190px;
-      font-family: 'Jost', sans-serif;
-      font-size: 0.78rem; font-weight: 300;
-      color: #888884;
+      width: 180px;
+      font-size: 0.76rem; font-weight: 300; color: #888480;
     }
     .col-period {
-      width: 138px;
-      font-family: 'Jost', sans-serif;
-      font-size: 0.72rem; font-weight: 300;
-      color: #aeaaa6; white-space: nowrap;
+      width: 136px;
+      font-size: 0.7rem; font-weight: 300;
+      color: #aaa8a2; white-space: nowrap;
+      font-family: var(--f-mono);
     }
     .col-company {
-      width: 160px;
-      font-family: 'Jost', sans-serif;
-      font-size: 0.75rem; font-weight: 300;
-      color: #aaaaaa;
+      width: 158px;
+      font-size: 0.73rem; font-weight: 300; color: #aaaaaa;
     }
     .col-role { width: 72px; vertical-align: middle; }
     .col-work {
-      font-family: 'Jost', sans-serif;
-      font-size: 0.8rem; font-weight: 300;
-      color: #666662; line-height: 1.72;
+      font-size: 0.78rem; font-weight: 300;
+      color: #625e58; line-height: 1.72;
     }
-
     .role-tag {
-      font-family: 'Jost', sans-serif;
-      font-size: 0.72rem; font-weight: 300;
-      color: #b0aca8; white-space: nowrap;
+      font-size: 0.68rem; font-weight: 300;
+      color: #b0aca6; white-space: nowrap;
     }
-    .role-tag.pl { color: #2a2a28; font-weight: 700; }
-    .role-tag.pm { color: #4a4a46; font-weight: 600; }
+    .role-tag.pl { color: #1c1916; font-weight: 600; }
+    .role-tag.pm { color: #4a4640; font-weight: 500; }
 
-    .hl { font-weight: 600; color: #7a5a3a; }
-
-    /* ── BACK LINK ── */
+    /* ── BACK / FOOTER ───────────────────────────────────── */
     .back-section { text-align: center; padding: 0 24px 64px; }
     .back-link {
       display: inline-flex; align-items: center; gap: 10px;
       padding: 12px 28px;
       border: 1px solid var(--border);
-      font-size: 0.72rem; font-weight: 400;
+      font-size: 0.7rem; font-weight: 400;
       letter-spacing: 0.2em; text-transform: uppercase;
       color: var(--warm); text-decoration: none;
       transition: all 0.3s ease;
     }
     .back-link:hover { border-color: var(--ink); background: var(--ink); color: var(--cream); }
 
-    /* ── FOOTER ── */
     footer {
-      padding: 28px 40px;
+      padding: 28px 48px;
       border-top: 1px solid var(--border);
       display: flex; justify-content: space-between;
       align-items: center; flex-wrap: wrap; gap: 12px;
     }
     .footer-quote {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: var(--f-display);
       font-style: italic; font-size: 0.95rem; color: var(--stone);
     }
     .footer-right { display: flex; gap: 28px; align-items: center; }
     .footer-right a {
-      font-size: 0.65rem; font-weight: 400;
+      font-size: 0.63rem; font-weight: 400;
       letter-spacing: 0.18em; text-transform: uppercase;
       color: var(--warm); text-decoration: none; transition: color 0.3s;
     }
     .footer-right a:hover { color: var(--ink); }
-    .footer-copy { font-size: 0.6rem; letter-spacing: 0.15em; color: var(--stone); text-transform: uppercase; }
+    .footer-copy { font-size: 0.58rem; letter-spacing: 0.14em; color: var(--stone); text-transform: uppercase; }
 
-    /* ── SCROLL REVEAL ── */
+    /* ── ANIMATION ───────────────────────────────────────── */
     .reveal { opacity: 0; }
-
-    /* ── ANIMATION ── */
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
+      from { opacity: 0; transform: translateY(18px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* ── MOBILE ── */
-    @media (max-width: 720px) {
-      nav { padding: 18px 20px; }
-      .nav-links { gap: 20px; }
-      .hero { padding: 0 20px 44px; min-height: 44vh; }
-      .summary-strip { position: static; margin-top: 32px; width: fit-content; }
-      main { padding: 40px 20px 60px; }
-      .section-header { flex-wrap: wrap; }
-      .section-count { margin-left: 0; }
-      footer { padding: 24px 20px; flex-direction: column; align-items: flex-start; }
+    /* ═══════════════════════════════════════════════════════
+       MOBILE LAYOUT  — 카드형 레이아웃 (≤ 768px)
+    ═══════════════════════════════════════════════════════ */
+    @media (max-width: 768px) {
+      body { cursor: auto; }
+      .cursor, .cursor-ring { display: none; }
+
+      /* NAV */
+      nav {
+        padding: 16px 20px;
+        background: rgba(243,237,228,0.96);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid var(--border);
+      }
+      .nav-brand { font-size: 0.88rem; letter-spacing: 0.14em; }
+      .nav-links { gap: 16px; }
+      .nav-links a { font-size: 0.62rem; letter-spacing: 0.14em; }
+
+      /* HERO */
+      .hero {
+        min-height: auto;
+        padding: 80px 20px 32px;
+        border-bottom: 1px solid var(--border);
+      }
+      .hero-eyebrow { font-size: 0.6rem; letter-spacing: 0.28em; margin-bottom: 14px; }
+      .hero-title {
+        font-size: clamp(2.4rem, 10vw, 3.2rem);
+        line-height: 0.95;
+      }
+      .hero-meta { font-size: 0.76rem; margin-top: 16px; }
+
+      /* STRIP → 가로 스크롤 배너 */
+      .summary-strip {
+        position: static;
+        margin-top: 28px;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        display: flex;
+        border: none;
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+        gap: 0;
+      }
+      .strip-item {
+        flex: 1;
+        padding: 14px 0;
+        border-right: 1px solid var(--border);
+        min-width: 80px;
+      }
+      .strip-item:last-child { border-right: none; }
+      .strip-num { font-size: 1.2rem; }
+      .strip-label { font-size: 0.54rem; }
+
+      /* MAIN */
+      main { padding: 32px 16px 60px; }
+
+      /* HIDE desktop table */
+      .table-wrap { display: none; }
+
+      /* SECTION HEADER */
+      .section-header { margin-bottom: 16px; }
+      .section-title { font-size: 1.15rem; }
+      .section-range { font-size: 0.64rem; }
+      .section-count { font-size: 0.62rem; }
+
+      /* ── MOBILE CARD LIST ── */
+      .card-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+      .card-item {
+        position: relative;
+        padding: 18px 16px 18px 44px;
+        border-bottom: 1px solid var(--border);
+        transition: background 0.18s;
+      }
+      .card-item:first-child { border-top: 1px solid var(--border); }
+      .card-item:active { background: var(--row-h); }
+
+      .card-num {
+        position: absolute;
+        left: 14px; top: 20px;
+        font-family: var(--f-mono);
+        font-size: 0.58rem; font-weight: 300;
+        color: #c0bab2; line-height: 1;
+      }
+
+      .card-top {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 8px;
+        margin-bottom: 5px;
+      }
+      .card-proj {
+        font-size: 0.88rem; font-weight: 500;
+        color: var(--ink); line-height: 1.4;
+        flex: 1;
+      }
+      .card-role-badge {
+        flex-shrink: 0;
+        font-size: 0.6rem; font-weight: 400;
+        padding: 2px 8px;
+        border: 1px solid var(--border);
+        color: var(--dim);
+        white-space: nowrap;
+        border-radius: 2px;
+        align-self: flex-start;
+        margin-top: 1px;
+      }
+      .card-role-badge.pl {
+        border-color: var(--ink);
+        color: var(--ink);
+        font-weight: 600;
+        background: rgba(28,25,22,0.05);
+      }
+      .card-role-badge.pm {
+        border-color: var(--warm);
+        color: var(--warm);
+        font-weight: 500;
+        background: rgba(138,111,88,0.05);
+      }
+
+      .card-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px 12px;
+        margin-bottom: 8px;
+        align-items: center;
+      }
+      .card-client {
+        font-size: 0.72rem; font-weight: 400;
+        color: var(--warm);
+      }
+      .card-meta-sep {
+        width: 3px; height: 3px;
+        background: var(--stone);
+        border-radius: 50%;
+        display: inline-block;
+        flex-shrink: 0;
+        margin-top: 1px;
+        align-self: center;
+      }
+      .card-period {
+        font-family: var(--f-mono);
+        font-size: 0.65rem; font-weight: 300;
+        color: var(--stone);
+      }
+      .card-company {
+        font-size: 0.66rem; font-weight: 300;
+        color: #b0aca6;
+      }
+
+      .card-work {
+        font-size: 0.76rem; font-weight: 300;
+        color: var(--dim); line-height: 1.65;
+        border-left: 2px solid var(--border);
+        padding-left: 10px;
+        margin-top: 4px;
+      }
+
+      /* COLLAPSIBLE — 초기 경력은 접혀있음 */
+      .career-section.collapsible .card-list {
+        display: none;
+      }
+      .career-section.collapsible.open .card-list {
+        display: flex;
+      }
+      .toggle-btn {
+        display: none;
+      }
+      .career-section.collapsible .toggle-btn {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        width: 100%;
+        padding: 12px 0 0;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-family: var(--f-body);
+        font-size: 0.68rem; font-weight: 400;
+        letter-spacing: 0.16em; text-transform: uppercase;
+        color: var(--warm);
+        text-align: left;
+      }
+      .toggle-btn .toggle-icon {
+        width: 18px; height: 18px;
+        border: 1px solid var(--border);
+        display: flex; align-items: center; justify-content: center;
+        font-size: 0.75rem; flex-shrink: 0;
+        transition: transform 0.3s;
+      }
+      .career-section.collapsible.open .toggle-btn .toggle-icon {
+        transform: rotate(45deg);
+      }
+
+      /* BACK */
+      .back-section { padding: 0 16px 48px; }
+      .back-link { font-size: 0.66rem; padding: 11px 22px; }
+
+      /* FOOTER */
+      footer {
+        padding: 22px 20px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+      }
+      .footer-quote { font-size: 0.88rem; }
+      .footer-right { gap: 20px; flex-wrap: wrap; }
+      .footer-right a { font-size: 0.6rem; }
+    }
+
+    /* 아주 작은 화면 */
+    @media (max-width: 360px) {
+      .hero-title { font-size: 2.2rem; }
+      .card-proj { font-size: 0.82rem; }
     }
   </style>
 </head>
@@ -306,7 +495,7 @@
 
   <!-- NAV -->
   <nav>
-    <a href="index.html" class="nav-brand">Jen<span>-</span>Archive</a>
+    <a href="index.html" class="nav-brand">Jen<em>-</em>Archive</a>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="jen-photo.html">Photo</a></li>
@@ -316,15 +505,14 @@
 
   <!-- HERO -->
   <section class="hero">
-    <p class="hero-eyebrow">Web Planner · UX/UI · 24 Years</p>
+    <p class="hero-eyebrow">Web Planner · UX/UI · 25 Years</p>
     <h1 class="hero-title">남혜진<br><em>Career</em></h1>
     <p class="hero-meta">
       UX/UI 서비스 기획자 &nbsp;·&nbsp; B2B 업무시스템 · 금융 · 이커머스
     </p>
-
     <div class="summary-strip">
       <div class="strip-item">
-        <div class="strip-num">24+</div>
+        <div class="strip-num">25+</div>
         <div class="strip-label">Years</div>
       </div>
       <div class="strip-item">
@@ -341,12 +529,14 @@
   <main>
 
     <!-- ── 최근 경력 ── -->
-    <section class="career-section">
+    <section class="career-section" id="recent">
       <div class="section-header">
         <span class="section-title">최근 경력</span>
         <span class="section-range">2013 – 2026</span>
         <span class="section-count">23 projects</span>
       </div>
+
+      <!-- DESKTOP TABLE -->
       <div class="table-wrap">
         <table>
           <thead>
@@ -361,225 +551,70 @@
             </tr>
           </thead>
           <tbody>
-                        <tr>
-              <td class="col-num">1</td>
-              <td class="col-proj">2026 MI 전사 체계 구축</td>
-              <td class="col-client">SK하이닉스</td>
-              <td class="col-company">유잇(주)</td>
-              <td class="col-period">2026.05–2026.07</td>
-              <td class="col-role"><span class="role-tag">기획</span></td>
-              <td class="col-work">MI포털 구축, AI agent 기획(마켓 센싱/인터렉티브/파일검색 에이전트)</td>
-            </tr>
-<tr>
-              <td class="col-num">2</td>
-              <td class="col-proj">HL만도 PLM 구축 UI 개선</td>
-              <td class="col-client">HL만도</td>
-              <td class="col-company">㈜토브</td>
-              <td class="col-period">2025.09–2026.03</td>
-              <td class="col-role"><span class="role-tag pl">기획 PL</span></td>
-              <td class="col-work">PLM 시스템 모듈별 UI 재설계 및 UI/UX 공통 설계 가이드 진행</td>
-            </tr>
-            <tr>
-              <td class="col-num">3</td>
-              <td class="col-proj">KAC 통합데이터플랫폼 구축 사업</td>
-              <td class="col-client">한국공항공사</td>
-              <td class="col-company">㈜모비젠</td>
-              <td class="col-period">2025.04–2025.09</td>
-              <td class="col-role"><span class="role-tag">기획</span></td>
-              <td class="col-work">공공 빅데이터 시각화 UI 기획</td>
-            </tr>
-            <tr>
-              <td class="col-num">4</td>
-              <td class="col-proj">삼성전자 App DevOps UI 개선 운영</td>
-              <td class="col-client">삼성전자</td>
-              <td class="col-company">(주)토브</td>
-              <td class="col-period">2023.02–2024.12</td>
-              <td class="col-role"><span class="role-tag">기획</span></td>
-              <td class="col-work">DevOps UI 개선 기획</td>
-            </tr>
-            <tr>
-              <td class="col-num">5</td>
-              <td class="col-proj">롯데백화점 디지털 채널 운영 (APP, MO, PC)</td>
-              <td class="col-client">롯데정보통신</td>
-              <td class="col-company">㈜큐랩스</td>
-              <td class="col-period">2022.05–2023.01</td>
-              <td class="col-role"><span class="role-tag pm">기획 PM</span></td>
-              <td class="col-work">APP·MOW·PC 운영 개발, 서비스 개선 및 신규 기능 개발</td>
-            </tr>
-            <tr>
-              <td class="col-num">6</td>
-              <td class="col-proj">롯데백화점 디지털 채널 운영 (APP, MO, PC)</td>
-              <td class="col-client">롯데정보통신</td>
-              <td class="col-company">㈜애드캡슐소프트</td>
-              <td class="col-period">2021.07–2022.04</td>
-              <td class="col-role"><span class="role-tag pm">기획 PM</span></td>
-              <td class="col-work">APP·MOW·PC 운영 개발, 서비스 개선 및 신규 기능 개발</td>
-            </tr>
-            <tr>
-              <td class="col-num">7</td>
-              <td class="col-proj">롯데면세점 웹/모바일 운영 (주문결제클레임 모듈)</td>
-              <td class="col-client">롯데이커머스</td>
-              <td class="col-company">㈜쓰리탑</td>
-              <td class="col-period">2021.01–2021.06</td>
-              <td class="col-role"><span class="role-tag">기획</span></td>
-              <td class="col-work">주문/결제/클레임 모듈 운영 및 신규 개선 프로젝트 기획</td>
-            </tr>
-            <tr>
-              <td class="col-num">8</td>
-              <td class="col-proj">롯데면세점 웹/모바일 운영 (주문결제클레임 모듈)</td>
-              <td class="col-client">롯데이커머스</td>
-              <td class="col-company">㈜비에이비오커뮤니케이션</td>
-              <td class="col-period">2019.08–2020.12</td>
-              <td class="col-role"><span class="role-tag">기획</span></td>
-              <td class="col-work">주문/결제/클레임 모듈 운영 및 신규 개선 프로젝트 기획</td>
-            </tr>
-            <tr>
-              <td class="col-num">9</td>
-              <td class="col-proj">롯데홈쇼핑 웹/모바일APP 운영 (주문파트)</td>
-              <td class="col-client">롯데홈쇼핑</td>
-              <td class="col-company">㈜고스트코어</td>
-              <td class="col-period">2019.01–2019.08</td>
-              <td class="col-role"><span class="role-tag">기획</span></td>
-              <td class="col-work">주문/결제/클레임 파트 운영</td>
-            </tr>
-            <tr>
-              <td class="col-num">10</td>
-              <td class="col-proj">아리따움 옴니채널 시너지프로그램 구축</td>
-              <td class="col-client">아리따움</td>
-              <td class="col-company">㈜아이시프트</td>
-              <td class="col-period">2018.10–2018.12</td>
-              <td class="col-role"><span class="role-tag pm">기획 PM</span></td>
-              <td class="col-work">온오프라인 채널 연동 구축 기획</td>
-            </tr>
-            <tr>
-              <td class="col-num">11</td>
-              <td class="col-proj">에스쁘아 웹/모바일 쇼핑몰 구축 (국내/역직구)</td>
-              <td class="col-client">에스쁘아</td>
-              <td class="col-company">㈜아이시프트</td>
-              <td class="col-period">2018.04–2018.09</td>
-              <td class="col-role"><span class="role-tag pm">기획 PM</span></td>
-              <td class="col-work">에스쁘아 Web/Mobile/App 쇼핑몰 구축 (국·영·중)</td>
-            </tr>
-            <tr>
-              <td class="col-num">12</td>
-              <td class="col-proj">현대카드 웹사이트 운영</td>
-              <td class="col-client">현대카드</td>
-              <td class="col-company">㈜애드캡슐소프트</td>
-              <td class="col-period">2017.12–2018.03</td>
-              <td class="col-role"><span class="role-tag pm">기획 PM</span></td>
-              <td class="col-work">현대카드 Web/Mobile/App 운영</td>
-            </tr>
-            <tr>
-              <td class="col-num">13</td>
-              <td class="col-proj">호텔 롯데리조트속초 사이트 고도화</td>
-              <td class="col-client">롯데정보통신</td>
-              <td class="col-company">㈜애드캡슐소프트</td>
-              <td class="col-period">2017.07–2017.11</td>
-              <td class="col-role"><span class="role-tag pm">기획 PM</span></td>
-              <td class="col-work">롯데리조트속초 Web/Mobile 사이트 구축 (예약 정책 수립)</td>
-            </tr>
-            <tr>
-              <td class="col-num">14</td>
-              <td class="col-proj">NH투자증권 모바일앱 UX개선</td>
-              <td class="col-client">NH투자증권</td>
-              <td class="col-company">㈜애드캡슐소프트</td>
-              <td class="col-period">2017.04–2017.06</td>
-              <td class="col-role"><span class="role-tag pm">기획 PM</span></td>
-              <td class="col-work">증권 MTS 나무·QV 모바일앱 UI 개선 기획</td>
-            </tr>
-            <tr>
-              <td class="col-num">15</td>
-              <td class="col-proj">Mobile 외환거래 개발 계약</td>
-              <td class="col-client">한국스탠다드차타드은행</td>
-              <td class="col-company">㈜애드캡슐소프트</td>
-              <td class="col-period">2016.11–2017.03</td>
-              <td class="col-role"><span class="role-tag pm">기획 PM</span></td>
-              <td class="col-work">외환거래 모바일 구축</td>
-            </tr>
-            <tr>
-              <td class="col-num">16</td>
-              <td class="col-proj">삼성증권 퇴직연금 UX고도화 개편</td>
-              <td class="col-client">삼성증권</td>
-              <td class="col-company">㈜애드캡슐소프트</td>
-              <td class="col-period">2016.08–2016.11</td>
-              <td class="col-role"><span class="role-tag pm">기획 PM</span></td>
-              <td class="col-work">퇴직연금 Web/Mobile 구축</td>
-            </tr>
-            <tr>
-              <td class="col-num">17</td>
-              <td class="col-proj">삼성증권 온라인 자산관리 구축</td>
-              <td class="col-client">삼성증권</td>
-              <td class="col-company">㈜애드캡슐소프트</td>
-              <td class="col-period">2016.04–2016.07</td>
-              <td class="col-role"><span class="role-tag pm">기획 PM</span></td>
-              <td class="col-work">로보어드바이저 서비스 Web 구축</td>
-            </tr>
-            <tr>
-              <td class="col-num">18</td>
-              <td class="col-proj">아리따움 아카데미 구축</td>
-              <td class="col-client">아모레퍼시픽</td>
-              <td class="col-company">㈜애드캡슐소프트</td>
-              <td class="col-period">2016.03–2016.04</td>
-              <td class="col-role"><span class="role-tag">기획</span></td>
-              <td class="col-work">학습 프로그램 연동 및 결제 프로세스 연동 설계</td>
-            </tr>
-            <tr>
-              <td class="col-num">19</td>
-              <td class="col-proj">Kier 유아 교육웹사이트 구축</td>
-              <td class="col-client">한국유아교육연구원</td>
-              <td class="col-company">한국유아교육연구원</td>
-              <td class="col-period">2015.10–2016.02</td>
-              <td class="col-role"><span class="role-tag pm">기획 PM</span></td>
-              <td class="col-work">자사몰 및 브랜드 Web/Mobile 쇼핑몰 구축</td>
-            </tr>
-            <tr>
-              <td class="col-num">20</td>
-              <td class="col-proj">모텍스아임 쇼핑몰 구축</td>
-              <td class="col-client">㈜모텍스</td>
-              <td class="col-company">㈜디자인팝</td>
-              <td class="col-period">2015.08–2015.10</td>
-              <td class="col-role"><span class="role-tag pm">기획 PM</span></td>
-              <td class="col-work">모텍스아임 Web/Mobile 쇼핑몰 구축 기획</td>
-            </tr>
-            <tr>
-              <td class="col-num">21</td>
-              <td class="col-proj">이태원 관광특구 홍보 Application 기획</td>
-              <td class="col-client">이태원관광특구연합</td>
-              <td class="col-company">㈜디자인팝</td>
-              <td class="col-period">2015.06–2015.09</td>
-              <td class="col-role"><span class="role-tag">기획</span></td>
-              <td class="col-work">이태원 관광특구 홍보 Application 구축 기획</td>
-            </tr>
-            <tr>
-              <td class="col-num">22</td>
-              <td class="col-proj">주얼리 쇼핑몰 운영</td>
-              <td class="col-client">민트여우</td>
-              <td class="col-company">민트여우</td>
-              <td class="col-period">2013.11–2015.03</td>
-              <td class="col-role"><span class="role-tag pm">기획 PM</span></td>
-              <td class="col-work">자사 쇼핑몰 구축 및 운영</td>
-            </tr>
-            <tr>
-              <td class="col-num">23</td>
-              <td class="col-proj">롯데 롭스(LOHB&#39;s) 브랜드 사이트 구축</td>
-              <td class="col-client">롯데정보통신</td>
-              <td class="col-company">㈜제오젠</td>
-              <td class="col-period">2013.01–2013.05</td>
-              <td class="col-role"><span class="role-tag pm">기획 PM</span></td>
-              <td class="col-work">롯데 LOHB&#39;s 브랜드 론칭 Web/Mobile 구축</td>
-            </tr>
+            <tr><td class="col-num">1</td><td class="col-proj">2026 MI 전사 체계 구축</td><td class="col-client">SK하이닉스</td><td class="col-company">유잇(주)</td><td class="col-period">2026.05–2026.07</td><td class="col-role"><span class="role-tag">기획</span></td><td class="col-work">MI포털 구축, AI agent 기획(마켓 센싱/인터렉티브/파일검색 에이전트)</td></tr>
+            <tr><td class="col-num">2</td><td class="col-proj">HL만도 PLM 구축 UI 개선</td><td class="col-client">HL만도</td><td class="col-company">㈜토브</td><td class="col-period">2025.09–2026.03</td><td class="col-role"><span class="role-tag pl">기획 PL</span></td><td class="col-work">PLM 시스템 모듈별 UI 재설계 및 UI/UX 공통 설계 가이드 진행</td></tr>
+            <tr><td class="col-num">3</td><td class="col-proj">KAC 통합데이터플랫폼 구축 사업</td><td class="col-client">한국공항공사</td><td class="col-company">㈜모비젠</td><td class="col-period">2025.04–2025.09</td><td class="col-role"><span class="role-tag">기획</span></td><td class="col-work">공공 빅데이터 시각화 UI 기획</td></tr>
+            <tr><td class="col-num">4</td><td class="col-proj">삼성전자 App DevOps UI 개선 운영</td><td class="col-client">삼성전자</td><td class="col-company">(주)토브</td><td class="col-period">2023.02–2024.12</td><td class="col-role"><span class="role-tag">기획</span></td><td class="col-work">DevOps UI 개선 기획</td></tr>
+            <tr><td class="col-num">5</td><td class="col-proj">롯데백화점 디지털 채널 운영 (APP, MO, PC)</td><td class="col-client">롯데정보통신</td><td class="col-company">㈜큐랩스</td><td class="col-period">2022.05–2023.01</td><td class="col-role"><span class="role-tag pm">기획 PM</span></td><td class="col-work">APP·MOW·PC 운영 개발, 서비스 개선 및 신규 기능 개발</td></tr>
+            <tr><td class="col-num">6</td><td class="col-proj">롯데백화점 디지털 채널 운영 (APP, MO, PC)</td><td class="col-client">롯데정보통신</td><td class="col-company">㈜애드캡슐소프트</td><td class="col-period">2021.07–2022.04</td><td class="col-role"><span class="role-tag pm">기획 PM</span></td><td class="col-work">APP·MOW·PC 운영 개발, 서비스 개선 및 신규 기능 개발</td></tr>
+            <tr><td class="col-num">7</td><td class="col-proj">롯데면세점 웹/모바일 운영 (주문결제클레임 모듈)</td><td class="col-client">롯데이커머스</td><td class="col-company">㈜쓰리탑</td><td class="col-period">2021.01–2021.06</td><td class="col-role"><span class="role-tag">기획</span></td><td class="col-work">주문/결제/클레임 모듈 운영 및 신규 개선 프로젝트 기획</td></tr>
+            <tr><td class="col-num">8</td><td class="col-proj">롯데면세점 웹/모바일 운영 (주문결제클레임 모듈)</td><td class="col-client">롯데이커머스</td><td class="col-company">㈜비에이비오커뮤니케이션</td><td class="col-period">2019.08–2020.12</td><td class="col-role"><span class="role-tag">기획</span></td><td class="col-work">주문/결제/클레임 모듈 운영 및 신규 개선 프로젝트 기획</td></tr>
+            <tr><td class="col-num">9</td><td class="col-proj">롯데홈쇼핑 웹/모바일APP 운영 (주문파트)</td><td class="col-client">롯데홈쇼핑</td><td class="col-company">㈜고스트코어</td><td class="col-period">2019.01–2019.08</td><td class="col-role"><span class="role-tag">기획</span></td><td class="col-work">주문/결제/클레임 파트 운영</td></tr>
+            <tr><td class="col-num">10</td><td class="col-proj">아리따움 옴니채널 시너지프로그램 구축</td><td class="col-client">아리따움</td><td class="col-company">㈜아이시프트</td><td class="col-period">2018.10–2018.12</td><td class="col-role"><span class="role-tag pm">기획 PM</span></td><td class="col-work">온오프라인 채널 연동 구축 기획</td></tr>
+            <tr><td class="col-num">11</td><td class="col-proj">에스쁘아 웹/모바일 쇼핑몰 구축 (국내/역직구)</td><td class="col-client">에스쁘아</td><td class="col-company">㈜아이시프트</td><td class="col-period">2018.04–2018.09</td><td class="col-role"><span class="role-tag pm">기획 PM</span></td><td class="col-work">에스쁘아 Web/Mobile/App 쇼핑몰 구축 (국·영·중)</td></tr>
+            <tr><td class="col-num">12</td><td class="col-proj">현대카드 웹사이트 운영</td><td class="col-client">현대카드</td><td class="col-company">㈜애드캡슐소프트</td><td class="col-period">2017.12–2018.03</td><td class="col-role"><span class="role-tag pm">기획 PM</span></td><td class="col-work">현대카드 Web/Mobile/App 운영</td></tr>
+            <tr><td class="col-num">13</td><td class="col-proj">호텔 롯데리조트속초 사이트 고도화</td><td class="col-client">롯데정보통신</td><td class="col-company">㈜애드캡슐소프트</td><td class="col-period">2017.07–2017.11</td><td class="col-role"><span class="role-tag pm">기획 PM</span></td><td class="col-work">롯데리조트속초 Web/Mobile 사이트 구축 (예약 정책 수립)</td></tr>
+            <tr><td class="col-num">14</td><td class="col-proj">NH투자증권 모바일앱 UX개선</td><td class="col-client">NH투자증권</td><td class="col-company">㈜애드캡슐소프트</td><td class="col-period">2017.04–2017.06</td><td class="col-role"><span class="role-tag pm">기획 PM</span></td><td class="col-work">증권 MTS 나무·QV 모바일앱 UI 개선 기획</td></tr>
+            <tr><td class="col-num">15</td><td class="col-proj">Mobile 외환거래 개발 계약</td><td class="col-client">한국스탠다드차타드은행</td><td class="col-company">㈜애드캡슐소프트</td><td class="col-period">2016.11–2017.03</td><td class="col-role"><span class="role-tag pm">기획 PM</span></td><td class="col-work">외환거래 모바일 구축</td></tr>
+            <tr><td class="col-num">16</td><td class="col-proj">삼성증권 퇴직연금 UX고도화 개편</td><td class="col-client">삼성증권</td><td class="col-company">㈜애드캡슐소프트</td><td class="col-period">2016.08–2016.11</td><td class="col-role"><span class="role-tag pm">기획 PM</span></td><td class="col-work">퇴직연금 Web/Mobile 구축</td></tr>
+            <tr><td class="col-num">17</td><td class="col-proj">삼성증권 온라인 자산관리 구축</td><td class="col-client">삼성증권</td><td class="col-company">㈜애드캡슐소프트</td><td class="col-period">2016.04–2016.07</td><td class="col-role"><span class="role-tag pm">기획 PM</span></td><td class="col-work">로보어드바이저 서비스 Web 구축</td></tr>
+            <tr><td class="col-num">18</td><td class="col-proj">아리따움 아카데미 구축</td><td class="col-client">아모레퍼시픽</td><td class="col-company">㈜애드캡슐소프트</td><td class="col-period">2016.03–2016.04</td><td class="col-role"><span class="role-tag">기획</span></td><td class="col-work">학습 프로그램 연동 및 결제 프로세스 연동 설계</td></tr>
+            <tr><td class="col-num">19</td><td class="col-proj">Kier 유아 교육웹사이트 구축</td><td class="col-client">한국유아교육연구원</td><td class="col-company">한국유아교육연구원</td><td class="col-period">2015.10–2016.02</td><td class="col-role"><span class="role-tag pm">기획 PM</span></td><td class="col-work">자사몰 및 브랜드 Web/Mobile 쇼핑몰 구축</td></tr>
+            <tr><td class="col-num">20</td><td class="col-proj">모텍스아임 쇼핑몰 구축</td><td class="col-client">㈜모텍스</td><td class="col-company">㈜디자인팝</td><td class="col-period">2015.08–2015.10</td><td class="col-role"><span class="role-tag pm">기획 PM</span></td><td class="col-work">모텍스아임 Web/Mobile 쇼핑몰 구축 기획</td></tr>
+            <tr><td class="col-num">21</td><td class="col-proj">이태원 관광특구 홍보 Application 기획</td><td class="col-client">이태원관광특구연합</td><td class="col-company">㈜디자인팝</td><td class="col-period">2015.06–2015.09</td><td class="col-role"><span class="role-tag">기획</span></td><td class="col-work">이태원 관광특구 홍보 Application 구축 기획</td></tr>
+            <tr><td class="col-num">22</td><td class="col-proj">주얼리 쇼핑몰 운영</td><td class="col-client">민트여우</td><td class="col-company">민트여우</td><td class="col-period">2013.11–2015.03</td><td class="col-role"><span class="role-tag pm">기획 PM</span></td><td class="col-work">자사 쇼핑몰 구축 및 운영</td></tr>
+            <tr><td class="col-num">23</td><td class="col-proj">롯데 롭스(LOHB&#39;s) 브랜드 사이트 구축</td><td class="col-client">롯데정보통신</td><td class="col-company">㈜제오젠</td><td class="col-period">2013.01–2013.05</td><td class="col-role"><span class="role-tag pm">기획 PM</span></td><td class="col-work">롯데 LOHB&#39;s 브랜드 론칭 Web/Mobile 구축</td></tr>
           </tbody>
         </table>
+      </div>
+
+      <!-- MOBILE CARD LIST -->
+      <div class="card-list">
+        <div class="card-item"><span class="card-num">01</span><div class="card-top"><span class="card-proj">2026 MI 전사 체계 구축</span><span class="card-role-badge">기획</span></div><div class="card-meta"><span class="card-client">SK하이닉스</span><span class="card-meta-sep"></span><span class="card-period">2026.05–07</span><span class="card-meta-sep"></span><span class="card-company">유잇(주)</span></div><div class="card-work">MI포털 구축, AI agent 기획(마켓 센싱/인터렉티브/파일검색 에이전트)</div></div>
+        <div class="card-item"><span class="card-num">02</span><div class="card-top"><span class="card-proj">HL만도 PLM 구축 UI 개선</span><span class="card-role-badge pl">기획 PL</span></div><div class="card-meta"><span class="card-client">HL만도</span><span class="card-meta-sep"></span><span class="card-period">2025.09–2026.03</span><span class="card-meta-sep"></span><span class="card-company">㈜토브</span></div><div class="card-work">PLM 시스템 모듈별 UI 재설계 및 UI/UX 공통 설계 가이드 진행</div></div>
+        <div class="card-item"><span class="card-num">03</span><div class="card-top"><span class="card-proj">KAC 통합데이터플랫폼 구축 사업</span><span class="card-role-badge">기획</span></div><div class="card-meta"><span class="card-client">한국공항공사</span><span class="card-meta-sep"></span><span class="card-period">2025.04–09</span><span class="card-meta-sep"></span><span class="card-company">㈜모비젠</span></div><div class="card-work">공공 빅데이터 시각화 UI 기획</div></div>
+        <div class="card-item"><span class="card-num">04</span><div class="card-top"><span class="card-proj">삼성전자 App DevOps UI 개선 운영</span><span class="card-role-badge">기획</span></div><div class="card-meta"><span class="card-client">삼성전자</span><span class="card-meta-sep"></span><span class="card-period">2023.02–2024.12</span><span class="card-meta-sep"></span><span class="card-company">(주)토브</span></div><div class="card-work">DevOps UI 개선 기획</div></div>
+        <div class="card-item"><span class="card-num">05</span><div class="card-top"><span class="card-proj">롯데백화점 디지털 채널 운영</span><span class="card-role-badge pm">기획 PM</span></div><div class="card-meta"><span class="card-client">롯데정보통신</span><span class="card-meta-sep"></span><span class="card-period">2022.05–2023.01</span><span class="card-meta-sep"></span><span class="card-company">㈜큐랩스</span></div><div class="card-work">APP·MOW·PC 운영 개발, 서비스 개선 및 신규 기능 개발</div></div>
+        <div class="card-item"><span class="card-num">06</span><div class="card-top"><span class="card-proj">롯데백화점 디지털 채널 운영</span><span class="card-role-badge pm">기획 PM</span></div><div class="card-meta"><span class="card-client">롯데정보통신</span><span class="card-meta-sep"></span><span class="card-period">2021.07–2022.04</span><span class="card-meta-sep"></span><span class="card-company">㈜애드캡슐소프트</span></div><div class="card-work">APP·MOW·PC 운영 개발, 서비스 개선 및 신규 기능 개발</div></div>
+        <div class="card-item"><span class="card-num">07</span><div class="card-top"><span class="card-proj">롯데면세점 웹/모바일 운영</span><span class="card-role-badge">기획</span></div><div class="card-meta"><span class="card-client">롯데이커머스</span><span class="card-meta-sep"></span><span class="card-period">2021.01–06</span><span class="card-meta-sep"></span><span class="card-company">㈜쓰리탑</span></div><div class="card-work">주문/결제/클레임 모듈 운영 및 신규 개선 프로젝트 기획</div></div>
+        <div class="card-item"><span class="card-num">08</span><div class="card-top"><span class="card-proj">롯데면세점 웹/모바일 운영</span><span class="card-role-badge">기획</span></div><div class="card-meta"><span class="card-client">롯데이커머스</span><span class="card-meta-sep"></span><span class="card-period">2019.08–2020.12</span><span class="card-meta-sep"></span><span class="card-company">㈜비에이비오</span></div><div class="card-work">주문/결제/클레임 모듈 운영 및 신규 개선 프로젝트 기획</div></div>
+        <div class="card-item"><span class="card-num">09</span><div class="card-top"><span class="card-proj">롯데홈쇼핑 웹/모바일APP 운영</span><span class="card-role-badge">기획</span></div><div class="card-meta"><span class="card-client">롯데홈쇼핑</span><span class="card-meta-sep"></span><span class="card-period">2019.01–08</span><span class="card-meta-sep"></span><span class="card-company">㈜고스트코어</span></div><div class="card-work">주문/결제/클레임 파트 운영</div></div>
+        <div class="card-item"><span class="card-num">10</span><div class="card-top"><span class="card-proj">아리따움 옴니채널 시너지프로그램 구축</span><span class="card-role-badge pm">기획 PM</span></div><div class="card-meta"><span class="card-client">아리따움</span><span class="card-meta-sep"></span><span class="card-period">2018.10–12</span><span class="card-meta-sep"></span><span class="card-company">㈜아이시프트</span></div><div class="card-work">온오프라인 채널 연동 구축 기획</div></div>
+        <div class="card-item"><span class="card-num">11</span><div class="card-top"><span class="card-proj">에스쁘아 웹/모바일 쇼핑몰 구축</span><span class="card-role-badge pm">기획 PM</span></div><div class="card-meta"><span class="card-client">에스쁘아</span><span class="card-meta-sep"></span><span class="card-period">2018.04–09</span><span class="card-meta-sep"></span><span class="card-company">㈜아이시프트</span></div><div class="card-work">에스쁘아 Web/Mobile/App 쇼핑몰 구축 (국·영·중)</div></div>
+        <div class="card-item"><span class="card-num">12</span><div class="card-top"><span class="card-proj">현대카드 웹사이트 운영</span><span class="card-role-badge pm">기획 PM</span></div><div class="card-meta"><span class="card-client">현대카드</span><span class="card-meta-sep"></span><span class="card-period">2017.12–2018.03</span><span class="card-meta-sep"></span><span class="card-company">㈜애드캡슐소프트</span></div><div class="card-work">현대카드 Web/Mobile/App 운영</div></div>
+        <div class="card-item"><span class="card-num">13</span><div class="card-top"><span class="card-proj">호텔 롯데리조트속초 사이트 고도화</span><span class="card-role-badge pm">기획 PM</span></div><div class="card-meta"><span class="card-client">롯데정보통신</span><span class="card-meta-sep"></span><span class="card-period">2017.07–11</span><span class="card-meta-sep"></span><span class="card-company">㈜애드캡슐소프트</span></div><div class="card-work">롯데리조트속초 Web/Mobile 사이트 구축 (예약 정책 수립)</div></div>
+        <div class="card-item"><span class="card-num">14</span><div class="card-top"><span class="card-proj">NH투자증권 모바일앱 UX개선</span><span class="card-role-badge pm">기획 PM</span></div><div class="card-meta"><span class="card-client">NH투자증권</span><span class="card-meta-sep"></span><span class="card-period">2017.04–06</span><span class="card-meta-sep"></span><span class="card-company">㈜애드캡슐소프트</span></div><div class="card-work">증권 MTS 나무·QV 모바일앱 UI 개선 기획</div></div>
+        <div class="card-item"><span class="card-num">15</span><div class="card-top"><span class="card-proj">Mobile 외환거래 개발 계약</span><span class="card-role-badge pm">기획 PM</span></div><div class="card-meta"><span class="card-client">한국SC은행</span><span class="card-meta-sep"></span><span class="card-period">2016.11–2017.03</span><span class="card-meta-sep"></span><span class="card-company">㈜애드캡슐소프트</span></div><div class="card-work">외환거래 모바일 구축</div></div>
+        <div class="card-item"><span class="card-num">16</span><div class="card-top"><span class="card-proj">삼성증권 퇴직연금 UX고도화 개편</span><span class="card-role-badge pm">기획 PM</span></div><div class="card-meta"><span class="card-client">삼성증권</span><span class="card-meta-sep"></span><span class="card-period">2016.08–11</span><span class="card-meta-sep"></span><span class="card-company">㈜애드캡슐소프트</span></div><div class="card-work">퇴직연금 Web/Mobile 구축</div></div>
+        <div class="card-item"><span class="card-num">17</span><div class="card-top"><span class="card-proj">삼성증권 온라인 자산관리 구축</span><span class="card-role-badge pm">기획 PM</span></div><div class="card-meta"><span class="card-client">삼성증권</span><span class="card-meta-sep"></span><span class="card-period">2016.04–07</span><span class="card-meta-sep"></span><span class="card-company">㈜애드캡슐소프트</span></div><div class="card-work">로보어드바이저 서비스 Web 구축</div></div>
+        <div class="card-item"><span class="card-num">18</span><div class="card-top"><span class="card-proj">아리따움 아카데미 구축</span><span class="card-role-badge">기획</span></div><div class="card-meta"><span class="card-client">아모레퍼시픽</span><span class="card-meta-sep"></span><span class="card-period">2016.03–04</span><span class="card-meta-sep"></span><span class="card-company">㈜애드캡슐소프트</span></div><div class="card-work">학습 프로그램 연동 및 결제 프로세스 연동 설계</div></div>
+        <div class="card-item"><span class="card-num">19</span><div class="card-top"><span class="card-proj">Kier 유아 교육웹사이트 구축</span><span class="card-role-badge pm">기획 PM</span></div><div class="card-meta"><span class="card-client">한국유아교육연구원</span><span class="card-meta-sep"></span><span class="card-period">2015.10–2016.02</span><span class="card-meta-sep"></span><span class="card-company">한국유아교육연구원</span></div><div class="card-work">자사몰 및 브랜드 Web/Mobile 쇼핑몰 구축</div></div>
+        <div class="card-item"><span class="card-num">20</span><div class="card-top"><span class="card-proj">모텍스아임 쇼핑몰 구축</span><span class="card-role-badge pm">기획 PM</span></div><div class="card-meta"><span class="card-client">㈜모텍스</span><span class="card-meta-sep"></span><span class="card-period">2015.08–10</span><span class="card-meta-sep"></span><span class="card-company">㈜디자인팝</span></div><div class="card-work">모텍스아임 Web/Mobile 쇼핑몰 구축 기획</div></div>
+        <div class="card-item"><span class="card-num">21</span><div class="card-top"><span class="card-proj">이태원 관광특구 홍보 Application</span><span class="card-role-badge">기획</span></div><div class="card-meta"><span class="card-client">이태원관광특구연합</span><span class="card-meta-sep"></span><span class="card-period">2015.06–09</span><span class="card-meta-sep"></span><span class="card-company">㈜디자인팝</span></div><div class="card-work">이태원 관광특구 홍보 Application 구축 기획</div></div>
+        <div class="card-item"><span class="card-num">22</span><div class="card-top"><span class="card-proj">주얼리 쇼핑몰 운영</span><span class="card-role-badge pm">기획 PM</span></div><div class="card-meta"><span class="card-client">민트여우</span><span class="card-meta-sep"></span><span class="card-period">2013.11–2015.03</span><span class="card-meta-sep"></span><span class="card-company">민트여우</span></div><div class="card-work">자사 쇼핑몰 구축 및 운영</div></div>
+        <div class="card-item"><span class="card-num">23</span><div class="card-top"><span class="card-proj">롯데 롭스(LOHB's) 브랜드 사이트 구축</span><span class="card-role-badge pm">기획 PM</span></div><div class="card-meta"><span class="card-client">롯데정보통신</span><span class="card-meta-sep"></span><span class="card-period">2013.01–05</span><span class="card-meta-sep"></span><span class="card-company">㈜제오젠</span></div><div class="card-work">롯데 LOHB's 브랜드 론칭 Web/Mobile 구축</div></div>
       </div>
     </section>
 
     <!-- ── 초기 경력 ── -->
-    <section class="career-section reveal">
+    <section class="career-section reveal collapsible" id="early">
       <div class="section-header">
         <span class="section-title">초기 경력</span>
         <span class="section-range">1996 – 2013</span>
         <span class="section-count">30 projects</span>
       </div>
+
+      <!-- DESKTOP TABLE -->
       <div class="table-wrap">
         <table>
           <thead>
@@ -594,278 +629,78 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td class="col-num">1</td>
-              <td class="col-proj">기아자동차 글로벌 서베이폼 리뉴얼 구축</td>
-              <td class="col-client">기아자동차</td>
-              <td class="col-company">㈜제오젠</td>
-              <td class="col-period">2013.01–2013.03</td>
-              <td class="col-role"><span class="role-tag pm">기획 PM</span></td>
-              <td class="col-work">글로벌 서베이폼 리뉴얼 구축</td>
-            </tr>
-            <tr>
-              <td class="col-num">2</td>
-              <td class="col-proj">HMC 글로벌 CSR 웹사이트 개편</td>
-              <td class="col-client">현대자동차</td>
-              <td class="col-company">㈜제오젠</td>
-              <td class="col-period">2012.06–2012.09</td>
-              <td class="col-role"><span class="role-tag pm">기획 PM</span></td>
-              <td class="col-work">CSR 웹사이트 개편 및 CMS 관리자 시스템 개선</td>
-            </tr>
-            <tr>
-              <td class="col-num">3</td>
-              <td class="col-proj">기아자동차 글로벌 서베이폼 제작</td>
-              <td class="col-client">기아자동차</td>
-              <td class="col-company">㈜제오젠</td>
-              <td class="col-period">2012.03–2012.08</td>
-              <td class="col-role"><span class="role-tag pm">기획 PM</span></td>
-              <td class="col-work">글로벌 서베이폼 리뉴얼 구축 및 운영</td>
-            </tr>
-            <tr>
-              <td class="col-num">4</td>
-              <td class="col-proj">현대글로비스 웹사이트 통합 개편</td>
-              <td class="col-client">현대글로비스</td>
-              <td class="col-company">㈜제오젠</td>
-              <td class="col-period">2011.07–2011.12</td>
-              <td class="col-role"><span class="role-tag pm">기획 PM</span></td>
-              <td class="col-work">현대글로비스 홈페이지·전자공시·윤리경영 사이트 개편</td>
-            </tr>
-            <tr>
-              <td class="col-num">5</td>
-              <td class="col-proj">어린이재단 웹사이트 개편</td>
-              <td class="col-client">어린이재단</td>
-              <td class="col-company">㈜제오젠</td>
-              <td class="col-period">2011.06–2012.02</td>
-              <td class="col-role"><span class="role-tag pm">기획 PM</span></td>
-              <td class="col-work">어린이재단 홈페이지 개편 기획</td>
-            </tr>
-            <tr>
-              <td class="col-num">6</td>
-              <td class="col-proj">현대파텍스 개편 구축</td>
-              <td class="col-client">현대파텍스</td>
-              <td class="col-company">㈜제오젠</td>
-              <td class="col-period">2010.11–2011.02</td>
-              <td class="col-role"><span class="role-tag pm">기획 PM</span></td>
-              <td class="col-work">현대파텍스 웹사이트 개편 구축 기획</td>
-            </tr>
-            <tr>
-              <td class="col-num">7</td>
-              <td class="col-proj">현대글로비스 열린경영 구축</td>
-              <td class="col-client">현대글로비스</td>
-              <td class="col-company">㈜제오젠</td>
-              <td class="col-period">2010.10–2010.12</td>
-              <td class="col-role"><span class="role-tag pm">기획 PM</span></td>
-              <td class="col-work">열린경영 웹사이트 구축 기획</td>
-            </tr>
-            <tr>
-              <td class="col-num">8</td>
-              <td class="col-proj">현대모비스 유지보수</td>
-              <td class="col-client">현대모비스</td>
-              <td class="col-company">㈜제오젠</td>
-              <td class="col-period">2010.08–2010.10</td>
-              <td class="col-role"><span class="role-tag pm">기획 PM</span></td>
-              <td class="col-work">현대모비스 웹사이트 및 커뮤니티 사이트 운영</td>
-            </tr>
-            <tr>
-              <td class="col-num">9</td>
-              <td class="col-proj">인천공항 서포터즈사이트 구축</td>
-              <td class="col-client">인천공항공사</td>
-              <td class="col-company">㈜나우온플레이닷컴</td>
-              <td class="col-period">2010.04–2010.07</td>
-              <td class="col-role"><span class="role-tag pm">기획 PM</span></td>
-              <td class="col-work">서포터즈 모집부터 운영 관리가 가능한 사이트 기획</td>
-            </tr>
-            <tr>
-              <td class="col-num">10</td>
-              <td class="col-proj">ZAPS 브랜드사이트 구축</td>
-              <td class="col-client">㈜팜클</td>
-              <td class="col-company">㈜나우온플레이닷컴</td>
-              <td class="col-period">2009.05–2009.07</td>
-              <td class="col-role"><span class="role-tag pm">기획 PM</span></td>
-              <td class="col-work">브랜드 아이덴티티를 강조하여 브랜드 이미지 제고 증대</td>
-            </tr>
-            <tr>
-              <td class="col-num">11</td>
-              <td class="col-proj">한국 오라클 운영</td>
-              <td class="col-client">한국오라클</td>
-              <td class="col-company">㈜나우온플레이닷컴</td>
-              <td class="col-period">2009.12–2010.07</td>
-              <td class="col-role"><span class="role-tag pm">기획 PM</span></td>
-              <td class="col-work">한국 오라클 웹사이트 운영</td>
-            </tr>
-            <tr>
-              <td class="col-num">12</td>
-              <td class="col-proj">인천공항 AIRSTAR 웹사이트 운영</td>
-              <td class="col-client">인천공항공사</td>
-              <td class="col-company">㈜나우온플레이닷컴</td>
-              <td class="col-period">2009.12–2010.07</td>
-              <td class="col-role"><span class="role-tag pm">기획 PM</span></td>
-              <td class="col-work">콘텐츠 기획 및 서비스 개선 제안</td>
-            </tr>
-            <tr>
-              <td class="col-num">13</td>
-              <td class="col-proj">ZAPS브랜드사이트·팜클·잡스몰 운영</td>
-              <td class="col-client">㈜팜클</td>
-              <td class="col-company">㈜나우온플레이닷컴</td>
-              <td class="col-period">2009.11–2010.07</td>
-              <td class="col-role"><span class="role-tag pm">기획 PM</span></td>
-              <td class="col-work">ZAPS 브랜드 사이트·팜클 사이트·잡스몰(쇼핑몰) 운영</td>
-            </tr>
-            <tr>
-              <td class="col-num">14</td>
-              <td class="col-proj">어린이재단 웹사이트 운영</td>
-              <td class="col-client">어린이재단</td>
-              <td class="col-company">㈜나우온플레이닷컴</td>
-              <td class="col-period">2009.11–2010.07</td>
-              <td class="col-role"><span class="role-tag pm">기획 PM</span></td>
-              <td class="col-work">캠페인 기획 및 상시 운영</td>
-            </tr>
-            <tr>
-              <td class="col-num">15</td>
-              <td class="col-proj">TWORLD 멤버십 개편</td>
-              <td class="col-client">SK텔레콤</td>
-              <td class="col-company">㈜나우온플레이닷컴</td>
-              <td class="col-period">2008.12</td>
-              <td class="col-role"><span class="role-tag pm">기획 PM</span></td>
-              <td class="col-work">멤버십 사이트 개편 기획</td>
-            </tr>
-            <tr>
-              <td class="col-num">16</td>
-              <td class="col-proj">TWORLD 멤버십사이트 운영</td>
-              <td class="col-client">SK텔레콤</td>
-              <td class="col-company">㈜나우온플레이닷컴</td>
-              <td class="col-period">2008.06–2010.07</td>
-              <td class="col-role"><span class="role-tag pm">기획 PM</span></td>
-              <td class="col-work">상시 운영 및 개선 제안, 보고 및 제안</td>
-            </tr>
-            <tr>
-              <td class="col-num">17</td>
-              <td class="col-proj">TTL PlayON사이트 운영</td>
-              <td class="col-client">SK텔레콤</td>
-              <td class="col-company">㈜나우온플레이닷컴</td>
-              <td class="col-period">2008.06–2008.12</td>
-              <td class="col-role"><span class="role-tag pm">기획 PM</span></td>
-              <td class="col-work">상시 운영 및 개선 제안, 보고 및 제안</td>
-            </tr>
-            <tr>
-              <td class="col-num">18</td>
-              <td class="col-proj">SK텔레콤 통화부가서비스 상품 운영 및 기획</td>
-              <td class="col-client">SK텔레콤</td>
-              <td class="col-company">㈜모엔트</td>
-              <td class="col-period">2007.04–2008.06</td>
-              <td class="col-role"><span class="role-tag">기획</span></td>
-              <td class="col-work">이미지콜/레터링 플러스 서비스 운영, Visual VAS 채널 기획</td>
-            </tr>
-            <tr>
-              <td class="col-num">19</td>
-              <td class="col-proj">TWORLD 멤버십 개편</td>
-              <td class="col-client">SK텔레콤</td>
-              <td class="col-company">㈜나우온플레이닷컴</td>
-              <td class="col-period">2006.12</td>
-              <td class="col-role"><span class="role-tag pm">기획 PM</span></td>
-              <td class="col-work">멤버십 사이트 개편 기획</td>
-            </tr>
-            <tr>
-              <td class="col-num">20</td>
-              <td class="col-proj">TWORLD 멤버십사이트 운영</td>
-              <td class="col-client">SK텔레콤</td>
-              <td class="col-company">㈜나우온플레이닷컴</td>
-              <td class="col-period">2006.03–2007.04</td>
-              <td class="col-role"><span class="role-tag pm">기획 PM</span></td>
-              <td class="col-work">상시 운영 및 개선 제안, 보고 및 제안</td>
-            </tr>
-            <tr>
-              <td class="col-num">21</td>
-              <td class="col-proj">보영테크㈜ 웹사이트 구축 및 운영</td>
-              <td class="col-client">보영테크㈜</td>
-              <td class="col-company">보영테크㈜</td>
-              <td class="col-period">2005.09–2006.01</td>
-              <td class="col-role"><span class="role-tag">기획</span></td>
-              <td class="col-work">자사 쇼핑몰 및 오픈마켓 관리, 본사 웹사이트 관리</td>
-            </tr>
-            <tr>
-              <td class="col-num">22</td>
-              <td class="col-proj">씨티은행 리브랜딩 기업고객 웹사이트 구축</td>
-              <td class="col-client">씨티은행</td>
-              <td class="col-company">㈜B&amp;M Tech</td>
-              <td class="col-period">2005.05–2005.08</td>
-              <td class="col-role"><span class="role-tag">기획</span></td>
-              <td class="col-work">기업고객 홈페이지 기획</td>
-            </tr>
-            <tr>
-              <td class="col-num">23</td>
-              <td class="col-proj">S&amp;P학습능력개발원 웹사이트 리뉴얼</td>
-              <td class="col-client">S&amp;P학습능력개발원</td>
-              <td class="col-company">S&amp;P학습능력개발원</td>
-              <td class="col-period">2004.02–2004.06</td>
-              <td class="col-role"><span class="role-tag pm">기획 PM</span></td>
-              <td class="col-work">자사 웹사이트 구축 및 운영</td>
-            </tr>
-            <tr>
-              <td class="col-num">24</td>
-              <td class="col-proj">S&amp;P 관련 웹사이트 구축/운영</td>
-              <td class="col-client">S&amp;P학습능력개발원</td>
-              <td class="col-company">S&amp;P학습능력개발원</td>
-              <td class="col-period">2003.04–2005.05</td>
-              <td class="col-role"><span class="role-tag pm">기획 PM</span></td>
-              <td class="col-work">홈트레이닝 시스템 기획, 본사/교육원 관리프로그램 기획</td>
-            </tr>
-            <tr>
-              <td class="col-num">25</td>
-              <td class="col-proj">Biho-Telecom 웹사이트 구축</td>
-              <td class="col-client">Biho-Telecom</td>
-              <td class="col-company">Gam-com</td>
-              <td class="col-period">2000.03–2000.07</td>
-              <td class="col-role"><span class="role-tag pm">기획 PM</span></td>
-              <td class="col-work">자사 웹사이트 구축 기획</td>
-            </tr>
-            <tr>
-              <td class="col-num">26</td>
-              <td class="col-proj">㈜Catill 웹사이트 구축</td>
-              <td class="col-client">㈜Catill</td>
-              <td class="col-company">Gam-com</td>
-              <td class="col-period">1999.10–2000.01</td>
-              <td class="col-role"><span class="role-tag pm">기획 PM</span></td>
-              <td class="col-work">자사 웹사이트 구축 기획</td>
-            </tr>
-            <tr>
-              <td class="col-num">27</td>
-              <td class="col-proj">Gam-com 웹사이트 구축</td>
-              <td class="col-client">Gam-com</td>
-              <td class="col-company">Gam-com</td>
-              <td class="col-period">1999.03–1999.05</td>
-              <td class="col-role"><span class="role-tag pm">기획 PM</span></td>
-              <td class="col-work">자사 웹사이트 구축 기획</td>
-            </tr>
-            <tr>
-              <td class="col-num">28</td>
-              <td class="col-proj">전남교육연수원 웹사이트 구축</td>
-              <td class="col-client">전남교육청</td>
-              <td class="col-company">㈜케이콤</td>
-              <td class="col-period">1997.10–1997.12</td>
-              <td class="col-role"><span class="role-tag">기획</span></td>
-              <td class="col-work">전남교육연수원 웹사이트 구축 기획</td>
-            </tr>
-            <tr>
-              <td class="col-num">29</td>
-              <td class="col-proj">광주/전남 초ㆍ중학교 웹사이트 구축</td>
-              <td class="col-client">전남교육청</td>
-              <td class="col-company">㈜케이콤</td>
-              <td class="col-period">1997.03–1997.10</td>
-              <td class="col-role"><span class="role-tag">기획</span></td>
-              <td class="col-work">초/중학교 홈페이지 구축 기획</td>
-            </tr>
-            <tr>
-              <td class="col-num">30</td>
-              <td class="col-proj">PC통신 나우누리 서비스 운영</td>
-              <td class="col-client">나우누리</td>
-              <td class="col-company">㈜케이콤</td>
-              <td class="col-period">1996.02–1998.03</td>
-              <td class="col-role"><span class="role-tag">기획</span></td>
-              <td class="col-work">나우누리 서비스 운영 지원</td>
-            </tr>
+            <tr><td class="col-num">1</td><td class="col-proj">기아자동차 글로벌 서베이폼 리뉴얼 구축</td><td class="col-client">기아자동차</td><td class="col-company">㈜제오젠</td><td class="col-period">2013.01–2013.03</td><td class="col-role"><span class="role-tag pm">기획 PM</span></td><td class="col-work">글로벌 서베이폼 리뉴얼 구축</td></tr>
+            <tr><td class="col-num">2</td><td class="col-proj">HMC 글로벌 CSR 웹사이트 개편</td><td class="col-client">현대자동차</td><td class="col-company">㈜제오젠</td><td class="col-period">2012.06–2012.09</td><td class="col-role"><span class="role-tag pm">기획 PM</span></td><td class="col-work">CSR 웹사이트 개편 및 CMS 관리자 시스템 개선</td></tr>
+            <tr><td class="col-num">3</td><td class="col-proj">기아자동차 글로벌 서베이폼 제작</td><td class="col-client">기아자동차</td><td class="col-company">㈜제오젠</td><td class="col-period">2012.03–2012.08</td><td class="col-role"><span class="role-tag pm">기획 PM</span></td><td class="col-work">글로벌 서베이폼 리뉴얼 구축 및 운영</td></tr>
+            <tr><td class="col-num">4</td><td class="col-proj">현대글로비스 웹사이트 통합 개편</td><td class="col-client">현대글로비스</td><td class="col-company">㈜제오젠</td><td class="col-period">2011.07–2011.12</td><td class="col-role"><span class="role-tag pm">기획 PM</span></td><td class="col-work">현대글로비스 홈페이지·전자공시·윤리경영 사이트 개편</td></tr>
+            <tr><td class="col-num">5</td><td class="col-proj">어린이재단 웹사이트 개편</td><td class="col-client">어린이재단</td><td class="col-company">㈜제오젠</td><td class="col-period">2011.06–2012.02</td><td class="col-role"><span class="role-tag pm">기획 PM</span></td><td class="col-work">어린이재단 홈페이지 개편 기획</td></tr>
+            <tr><td class="col-num">6</td><td class="col-proj">현대파텍스 개편 구축</td><td class="col-client">현대파텍스</td><td class="col-company">㈜제오젠</td><td class="col-period">2010.11–2011.02</td><td class="col-role"><span class="role-tag pm">기획 PM</span></td><td class="col-work">현대파텍스 웹사이트 개편 구축 기획</td></tr>
+            <tr><td class="col-num">7</td><td class="col-proj">현대글로비스 열린경영 구축</td><td class="col-client">현대글로비스</td><td class="col-company">㈜제오젠</td><td class="col-period">2010.10–2010.12</td><td class="col-role"><span class="role-tag pm">기획 PM</span></td><td class="col-work">열린경영 웹사이트 구축 기획</td></tr>
+            <tr><td class="col-num">8</td><td class="col-proj">현대모비스 유지보수</td><td class="col-client">현대모비스</td><td class="col-company">㈜제오젠</td><td class="col-period">2010.08–2010.10</td><td class="col-role"><span class="role-tag pm">기획 PM</span></td><td class="col-work">현대모비스 웹사이트 및 커뮤니티 사이트 운영</td></tr>
+            <tr><td class="col-num">9</td><td class="col-proj">인천공항 서포터즈사이트 구축</td><td class="col-client">인천공항공사</td><td class="col-company">㈜나우온플레이닷컴</td><td class="col-period">2010.04–2010.07</td><td class="col-role"><span class="role-tag pm">기획 PM</span></td><td class="col-work">서포터즈 모집부터 운영 관리가 가능한 사이트 기획</td></tr>
+            <tr><td class="col-num">10</td><td class="col-proj">ZAPS 브랜드사이트 구축</td><td class="col-client">㈜팜클</td><td class="col-company">㈜나우온플레이닷컴</td><td class="col-period">2009.05–2009.07</td><td class="col-role"><span class="role-tag pm">기획 PM</span></td><td class="col-work">브랜드 아이덴티티를 강조하여 브랜드 이미지 제고 증대</td></tr>
+            <tr><td class="col-num">11</td><td class="col-proj">한국 오라클 운영</td><td class="col-client">한국오라클</td><td class="col-company">㈜나우온플레이닷컴</td><td class="col-period">2009.12–2010.07</td><td class="col-role"><span class="role-tag pm">기획 PM</span></td><td class="col-work">한국 오라클 웹사이트 운영</td></tr>
+            <tr><td class="col-num">12</td><td class="col-proj">인천공항 AIRSTAR 웹사이트 운영</td><td class="col-client">인천공항공사</td><td class="col-company">㈜나우온플레이닷컴</td><td class="col-period">2009.12–2010.07</td><td class="col-role"><span class="role-tag pm">기획 PM</span></td><td class="col-work">콘텐츠 기획 및 서비스 개선 제안</td></tr>
+            <tr><td class="col-num">13</td><td class="col-proj">ZAPS브랜드사이트·팜클·잡스몰 운영</td><td class="col-client">㈜팜클</td><td class="col-company">㈜나우온플레이닷컴</td><td class="col-period">2009.11–2010.07</td><td class="col-role"><span class="role-tag pm">기획 PM</span></td><td class="col-work">ZAPS 브랜드 사이트·팜클 사이트·잡스몰(쇼핑몰) 운영</td></tr>
+            <tr><td class="col-num">14</td><td class="col-proj">어린이재단 웹사이트 운영</td><td class="col-client">어린이재단</td><td class="col-company">㈜나우온플레이닷컴</td><td class="col-period">2009.11–2010.07</td><td class="col-role"><span class="role-tag pm">기획 PM</span></td><td class="col-work">캠페인 기획 및 상시 운영</td></tr>
+            <tr><td class="col-num">15</td><td class="col-proj">TWORLD 멤버십 개편</td><td class="col-client">SK텔레콤</td><td class="col-company">㈜나우온플레이닷컴</td><td class="col-period">2008.12</td><td class="col-role"><span class="role-tag pm">기획 PM</span></td><td class="col-work">멤버십 사이트 개편 기획</td></tr>
+            <tr><td class="col-num">16</td><td class="col-proj">TWORLD 멤버십사이트 운영</td><td class="col-client">SK텔레콤</td><td class="col-company">㈜나우온플레이닷컴</td><td class="col-period">2008.06–2010.07</td><td class="col-role"><span class="role-tag pm">기획 PM</span></td><td class="col-work">상시 운영 및 개선 제안, 보고 및 제안</td></tr>
+            <tr><td class="col-num">17</td><td class="col-proj">TTL PlayON사이트 운영</td><td class="col-client">SK텔레콤</td><td class="col-company">㈜나우온플레이닷컴</td><td class="col-period">2008.06–2008.12</td><td class="col-role"><span class="role-tag pm">기획 PM</span></td><td class="col-work">상시 운영 및 개선 제안, 보고 및 제안</td></tr>
+            <tr><td class="col-num">18</td><td class="col-proj">SK텔레콤 통화부가서비스 상품 운영 및 기획</td><td class="col-client">SK텔레콤</td><td class="col-company">㈜모엔트</td><td class="col-period">2007.04–2008.06</td><td class="col-role"><span class="role-tag">기획</span></td><td class="col-work">이미지콜/레터링 플러스 서비스 운영, Visual VAS 채널 기획</td></tr>
+            <tr><td class="col-num">19</td><td class="col-proj">TWORLD 멤버십 개편</td><td class="col-client">SK텔레콤</td><td class="col-company">㈜나우온플레이닷컴</td><td class="col-period">2006.12</td><td class="col-role"><span class="role-tag pm">기획 PM</span></td><td class="col-work">멤버십 사이트 개편 기획</td></tr>
+            <tr><td class="col-num">20</td><td class="col-proj">TWORLD 멤버십사이트 운영</td><td class="col-client">SK텔레콤</td><td class="col-company">㈜나우온플레이닷컴</td><td class="col-period">2006.03–2007.04</td><td class="col-role"><span class="role-tag pm">기획 PM</span></td><td class="col-work">상시 운영 및 개선 제안, 보고 및 제안</td></tr>
+            <tr><td class="col-num">21</td><td class="col-proj">보영테크㈜ 웹사이트 구축 및 운영</td><td class="col-client">보영테크㈜</td><td class="col-company">보영테크㈜</td><td class="col-period">2005.09–2006.01</td><td class="col-role"><span class="role-tag">기획</span></td><td class="col-work">자사 쇼핑몰 및 오픈마켓 관리, 본사 웹사이트 관리</td></tr>
+            <tr><td class="col-num">22</td><td class="col-proj">씨티은행 리브랜딩 기업고객 웹사이트 구축</td><td class="col-client">씨티은행</td><td class="col-company">㈜B&amp;M Tech</td><td class="col-period">2005.05–2005.08</td><td class="col-role"><span class="role-tag">기획</span></td><td class="col-work">기업고객 홈페이지 기획</td></tr>
+            <tr><td class="col-num">23</td><td class="col-proj">S&amp;P학습능력개발원 웹사이트 리뉴얼</td><td class="col-client">S&amp;P학습능력개발원</td><td class="col-company">S&amp;P학습능력개발원</td><td class="col-period">2004.02–2004.06</td><td class="col-role"><span class="role-tag pm">기획 PM</span></td><td class="col-work">자사 웹사이트 구축 및 운영</td></tr>
+            <tr><td class="col-num">24</td><td class="col-proj">S&amp;P 관련 웹사이트 구축/운영</td><td class="col-client">S&amp;P학습능력개발원</td><td class="col-company">S&amp;P학습능력개발원</td><td class="col-period">2003.04–2005.05</td><td class="col-role"><span class="role-tag pm">기획 PM</span></td><td class="col-work">홈트레이닝 시스템 기획, 본사/교육원 관리프로그램 기획</td></tr>
+            <tr><td class="col-num">25</td><td class="col-proj">Biho-Telecom 웹사이트 구축</td><td class="col-client">Biho-Telecom</td><td class="col-company">Gam-com</td><td class="col-period">2000.03–2000.07</td><td class="col-role"><span class="role-tag pm">기획 PM</span></td><td class="col-work">자사 웹사이트 구축 기획</td></tr>
+            <tr><td class="col-num">26</td><td class="col-proj">㈜Catill 웹사이트 구축</td><td class="col-client">㈜Catill</td><td class="col-company">Gam-com</td><td class="col-period">1999.10–2000.01</td><td class="col-role"><span class="role-tag pm">기획 PM</span></td><td class="col-work">자사 웹사이트 구축 기획</td></tr>
+            <tr><td class="col-num">27</td><td class="col-proj">Gam-com 웹사이트 구축</td><td class="col-client">Gam-com</td><td class="col-company">Gam-com</td><td class="col-period">1999.03–1999.05</td><td class="col-role"><span class="role-tag pm">기획 PM</span></td><td class="col-work">자사 웹사이트 구축 기획</td></tr>
+            <tr><td class="col-num">28</td><td class="col-proj">전남교육연수원 웹사이트 구축</td><td class="col-client">전남교육청</td><td class="col-company">㈜케이콤</td><td class="col-period">1997.10–1997.12</td><td class="col-role"><span class="role-tag">기획</span></td><td class="col-work">전남교육연수원 웹사이트 구축 기획</td></tr>
+            <tr><td class="col-num">29</td><td class="col-proj">광주/전남 초ㆍ중학교 웹사이트 구축</td><td class="col-client">전남교육청</td><td class="col-company">㈜케이콤</td><td class="col-period">1997.03–1997.10</td><td class="col-role"><span class="role-tag">기획</span></td><td class="col-work">초/중학교 홈페이지 구축 기획</td></tr>
+            <tr><td class="col-num">30</td><td class="col-proj">PC통신 나우누리 서비스 운영</td><td class="col-client">나우누리</td><td class="col-company">㈜케이콤</td><td class="col-period">1996.02–1998.03</td><td class="col-role"><span class="role-tag">기획</span></td><td class="col-work">나우누리 서비스 운영 지원</td></tr>
           </tbody>
         </table>
+      </div>
+
+      <!-- MOBILE TOGGLE BUTTON -->
+      <button class="toggle-btn" id="earlyToggle" aria-expanded="false">
+        <span class="toggle-icon">+</span>
+        <span class="toggle-label">초기 경력 30건 펼쳐보기</span>
+      </button>
+
+      <!-- MOBILE CARD LIST -->
+      <div class="card-list">
+        <div class="card-item"><span class="card-num">01</span><div class="card-top"><span class="card-proj">기아자동차 글로벌 서베이폼 리뉴얼</span><span class="card-role-badge pm">기획 PM</span></div><div class="card-meta"><span class="card-client">기아자동차</span><span class="card-meta-sep"></span><span class="card-period">2013.01–03</span><span class="card-meta-sep"></span><span class="card-company">㈜제오젠</span></div><div class="card-work">글로벌 서베이폼 리뉴얼 구축</div></div>
+        <div class="card-item"><span class="card-num">02</span><div class="card-top"><span class="card-proj">HMC 글로벌 CSR 웹사이트 개편</span><span class="card-role-badge pm">기획 PM</span></div><div class="card-meta"><span class="card-client">현대자동차</span><span class="card-meta-sep"></span><span class="card-period">2012.06–09</span><span class="card-meta-sep"></span><span class="card-company">㈜제오젠</span></div><div class="card-work">CSR 웹사이트 개편 및 CMS 관리자 시스템 개선</div></div>
+        <div class="card-item"><span class="card-num">03</span><div class="card-top"><span class="card-proj">기아자동차 글로벌 서베이폼 제작</span><span class="card-role-badge pm">기획 PM</span></div><div class="card-meta"><span class="card-client">기아자동차</span><span class="card-meta-sep"></span><span class="card-period">2012.03–08</span><span class="card-meta-sep"></span><span class="card-company">㈜제오젠</span></div><div class="card-work">글로벌 서베이폼 리뉴얼 구축 및 운영</div></div>
+        <div class="card-item"><span class="card-num">04</span><div class="card-top"><span class="card-proj">현대글로비스 웹사이트 통합 개편</span><span class="card-role-badge pm">기획 PM</span></div><div class="card-meta"><span class="card-client">현대글로비스</span><span class="card-meta-sep"></span><span class="card-period">2011.07–12</span><span class="card-meta-sep"></span><span class="card-company">㈜제오젠</span></div><div class="card-work">홈페이지·전자공시·윤리경영 사이트 개편</div></div>
+        <div class="card-item"><span class="card-num">05</span><div class="card-top"><span class="card-proj">어린이재단 웹사이트 개편</span><span class="card-role-badge pm">기획 PM</span></div><div class="card-meta"><span class="card-client">어린이재단</span><span class="card-meta-sep"></span><span class="card-period">2011.06–2012.02</span><span class="card-meta-sep"></span><span class="card-company">㈜제오젠</span></div><div class="card-work">어린이재단 홈페이지 개편 기획</div></div>
+        <div class="card-item"><span class="card-num">06</span><div class="card-top"><span class="card-proj">현대파텍스 개편 구축</span><span class="card-role-badge pm">기획 PM</span></div><div class="card-meta"><span class="card-client">현대파텍스</span><span class="card-meta-sep"></span><span class="card-period">2010.11–2011.02</span><span class="card-meta-sep"></span><span class="card-company">㈜제오젠</span></div><div class="card-work">현대파텍스 웹사이트 개편 구축 기획</div></div>
+        <div class="card-item"><span class="card-num">07</span><div class="card-top"><span class="card-proj">현대글로비스 열린경영 구축</span><span class="card-role-badge pm">기획 PM</span></div><div class="card-meta"><span class="card-client">현대글로비스</span><span class="card-meta-sep"></span><span class="card-period">2010.10–12</span><span class="card-meta-sep"></span><span class="card-company">㈜제오젠</span></div><div class="card-work">열린경영 웹사이트 구축 기획</div></div>
+        <div class="card-item"><span class="card-num">08</span><div class="card-top"><span class="card-proj">현대모비스 유지보수</span><span class="card-role-badge pm">기획 PM</span></div><div class="card-meta"><span class="card-client">현대모비스</span><span class="card-meta-sep"></span><span class="card-period">2010.08–10</span><span class="card-meta-sep"></span><span class="card-company">㈜제오젠</span></div><div class="card-work">현대모비스 웹사이트 및 커뮤니티 사이트 운영</div></div>
+        <div class="card-item"><span class="card-num">09</span><div class="card-top"><span class="card-proj">인천공항 서포터즈사이트 구축</span><span class="card-role-badge pm">기획 PM</span></div><div class="card-meta"><span class="card-client">인천공항공사</span><span class="card-meta-sep"></span><span class="card-period">2010.04–07</span><span class="card-meta-sep"></span><span class="card-company">㈜나우온플레이닷컴</span></div><div class="card-work">서포터즈 모집부터 운영 관리가 가능한 사이트 기획</div></div>
+        <div class="card-item"><span class="card-num">10</span><div class="card-top"><span class="card-proj">ZAPS 브랜드사이트 구축</span><span class="card-role-badge pm">기획 PM</span></div><div class="card-meta"><span class="card-client">㈜팜클</span><span class="card-meta-sep"></span><span class="card-period">2009.05–07</span><span class="card-meta-sep"></span><span class="card-company">㈜나우온플레이닷컴</span></div><div class="card-work">브랜드 아이덴티티를 강조하여 브랜드 이미지 제고</div></div>
+        <div class="card-item"><span class="card-num">11</span><div class="card-top"><span class="card-proj">한국 오라클 운영</span><span class="card-role-badge pm">기획 PM</span></div><div class="card-meta"><span class="card-client">한국오라클</span><span class="card-meta-sep"></span><span class="card-period">2009.12–2010.07</span><span class="card-meta-sep"></span><span class="card-company">㈜나우온플레이닷컴</span></div><div class="card-work">한국 오라클 웹사이트 운영</div></div>
+        <div class="card-item"><span class="card-num">12</span><div class="card-top"><span class="card-proj">인천공항 AIRSTAR 웹사이트 운영</span><span class="card-role-badge pm">기획 PM</span></div><div class="card-meta"><span class="card-client">인천공항공사</span><span class="card-meta-sep"></span><span class="card-period">2009.12–2010.07</span><span class="card-meta-sep"></span><span class="card-company">㈜나우온플레이닷컴</span></div><div class="card-work">콘텐츠 기획 및 서비스 개선 제안</div></div>
+        <div class="card-item"><span class="card-num">13</span><div class="card-top"><span class="card-proj">ZAPS·팜클·잡스몰 운영</span><span class="card-role-badge pm">기획 PM</span></div><div class="card-meta"><span class="card-client">㈜팜클</span><span class="card-meta-sep"></span><span class="card-period">2009.11–2010.07</span><span class="card-meta-sep"></span><span class="card-company">㈜나우온플레이닷컴</span></div><div class="card-work">ZAPS 브랜드·팜클·잡스몰(쇼핑몰) 운영</div></div>
+        <div class="card-item"><span class="card-num">14</span><div class="card-top"><span class="card-proj">어린이재단 웹사이트 운영</span><span class="card-role-badge pm">기획 PM</span></div><div class="card-meta"><span class="card-client">어린이재단</span><span class="card-meta-sep"></span><span class="card-period">2009.11–2010.07</span><span class="card-meta-sep"></span><span class="card-company">㈜나우온플레이닷컴</span></div><div class="card-work">캠페인 기획 및 상시 운영</div></div>
+        <div class="card-item"><span class="card-num">15</span><div class="card-top"><span class="card-proj">TWORLD 멤버십 개편</span><span class="card-role-badge pm">기획 PM</span></div><div class="card-meta"><span class="card-client">SK텔레콤</span><span class="card-meta-sep"></span><span class="card-period">2008.12</span><span class="card-meta-sep"></span><span class="card-company">㈜나우온플레이닷컴</span></div><div class="card-work">멤버십 사이트 개편 기획</div></div>
+        <div class="card-item"><span class="card-num">16</span><div class="card-top"><span class="card-proj">TWORLD 멤버십사이트 운영</span><span class="card-role-badge pm">기획 PM</span></div><div class="card-meta"><span class="card-client">SK텔레콤</span><span class="card-meta-sep"></span><span class="card-period">2008.06–2010.07</span><span class="card-meta-sep"></span><span class="card-company">㈜나우온플레이닷컴</span></div><div class="card-work">상시 운영 및 개선 제안</div></div>
+        <div class="card-item"><span class="card-num">17</span><div class="card-top"><span class="card-proj">TTL PlayON사이트 운영</span><span class="card-role-badge pm">기획 PM</span></div><div class="card-meta"><span class="card-client">SK텔레콤</span><span class="card-meta-sep"></span><span class="card-period">2008.06–12</span><span class="card-meta-sep"></span><span class="card-company">㈜나우온플레이닷컴</span></div><div class="card-work">상시 운영 및 개선 제안</div></div>
+        <div class="card-item"><span class="card-num">18</span><div class="card-top"><span class="card-proj">SK텔레콤 통화부가서비스 운영 및 기획</span><span class="card-role-badge">기획</span></div><div class="card-meta"><span class="card-client">SK텔레콤</span><span class="card-meta-sep"></span><span class="card-period">2007.04–2008.06</span><span class="card-meta-sep"></span><span class="card-company">㈜모엔트</span></div><div class="card-work">이미지콜/레터링 플러스 서비스 운영, Visual VAS 채널 기획</div></div>
+        <div class="card-item"><span class="card-num">19</span><div class="card-top"><span class="card-proj">TWORLD 멤버십 개편</span><span class="card-role-badge pm">기획 PM</span></div><div class="card-meta"><span class="card-client">SK텔레콤</span><span class="card-meta-sep"></span><span class="card-period">2006.12</span><span class="card-meta-sep"></span><span class="card-company">㈜나우온플레이닷컴</span></div><div class="card-work">멤버십 사이트 개편 기획</div></div>
+        <div class="card-item"><span class="card-num">20</span><div class="card-top"><span class="card-proj">TWORLD 멤버십사이트 운영</span><span class="card-role-badge pm">기획 PM</span></div><div class="card-meta"><span class="card-client">SK텔레콤</span><span class="card-meta-sep"></span><span class="card-period">2006.03–2007.04</span><span class="card-meta-sep"></span><span class="card-company">㈜나우온플레이닷컴</span></div><div class="card-work">상시 운영 및 개선 제안</div></div>
+        <div class="card-item"><span class="card-num">21</span><div class="card-top"><span class="card-proj">보영테크㈜ 웹사이트 구축 및 운영</span><span class="card-role-badge">기획</span></div><div class="card-meta"><span class="card-client">보영테크㈜</span><span class="card-meta-sep"></span><span class="card-period">2005.09–2006.01</span><span class="card-meta-sep"></span><span class="card-company">보영테크㈜</span></div><div class="card-work">자사 쇼핑몰 및 오픈마켓 관리, 본사 웹사이트 관리</div></div>
+        <div class="card-item"><span class="card-num">22</span><div class="card-top"><span class="card-proj">씨티은행 리브랜딩 기업고객 웹사이트</span><span class="card-role-badge">기획</span></div><div class="card-meta"><span class="card-client">씨티은행</span><span class="card-meta-sep"></span><span class="card-period">2005.05–08</span><span class="card-meta-sep"></span><span class="card-company">㈜B&M Tech</span></div><div class="card-work">기업고객 홈페이지 기획</div></div>
+        <div class="card-item"><span class="card-num">23</span><div class="card-top"><span class="card-proj">S&P학습능력개발원 웹사이트 리뉴얼</span><span class="card-role-badge pm">기획 PM</span></div><div class="card-meta"><span class="card-client">S&P학습능력개발원</span><span class="card-meta-sep"></span><span class="card-period">2004.02–06</span><span class="card-meta-sep"></span><span class="card-company">S&P학습능력개발원</span></div><div class="card-work">자사 웹사이트 구축 및 운영</div></div>
+        <div class="card-item"><span class="card-num">24</span><div class="card-top"><span class="card-proj">S&P 관련 웹사이트 구축/운영</span><span class="card-role-badge pm">기획 PM</span></div><div class="card-meta"><span class="card-client">S&P학습능력개발원</span><span class="card-meta-sep"></span><span class="card-period">2003.04–2005.05</span><span class="card-meta-sep"></span><span class="card-company">S&P학습능력개발원</span></div><div class="card-work">홈트레이닝 시스템 기획, 본사/교육원 관리프로그램 기획</div></div>
+        <div class="card-item"><span class="card-num">25</span><div class="card-top"><span class="card-proj">Biho-Telecom 웹사이트 구축</span><span class="card-role-badge pm">기획 PM</span></div><div class="card-meta"><span class="card-client">Biho-Telecom</span><span class="card-meta-sep"></span><span class="card-period">2000.03–07</span><span class="card-meta-sep"></span><span class="card-company">Gam-com</span></div><div class="card-work">자사 웹사이트 구축 기획</div></div>
+        <div class="card-item"><span class="card-num">26</span><div class="card-top"><span class="card-proj">㈜Catill 웹사이트 구축</span><span class="card-role-badge pm">기획 PM</span></div><div class="card-meta"><span class="card-client">㈜Catill</span><span class="card-meta-sep"></span><span class="card-period">1999.10–2000.01</span><span class="card-meta-sep"></span><span class="card-company">Gam-com</span></div><div class="card-work">자사 웹사이트 구축 기획</div></div>
+        <div class="card-item"><span class="card-num">27</span><div class="card-top"><span class="card-proj">Gam-com 웹사이트 구축</span><span class="card-role-badge pm">기획 PM</span></div><div class="card-meta"><span class="card-client">Gam-com</span><span class="card-meta-sep"></span><span class="card-period">1999.03–05</span><span class="card-meta-sep"></span><span class="card-company">Gam-com</span></div><div class="card-work">자사 웹사이트 구축 기획</div></div>
+        <div class="card-item"><span class="card-num">28</span><div class="card-top"><span class="card-proj">전남교육연수원 웹사이트 구축</span><span class="card-role-badge">기획</span></div><div class="card-meta"><span class="card-client">전남교육청</span><span class="card-meta-sep"></span><span class="card-period">1997.10–12</span><span class="card-meta-sep"></span><span class="card-company">㈜케이콤</span></div><div class="card-work">전남교육연수원 웹사이트 구축 기획</div></div>
+        <div class="card-item"><span class="card-num">29</span><div class="card-top"><span class="card-proj">광주/전남 초ㆍ중학교 웹사이트 구축</span><span class="card-role-badge">기획</span></div><div class="card-meta"><span class="card-client">전남교육청</span><span class="card-meta-sep"></span><span class="card-period">1997.03–10</span><span class="card-meta-sep"></span><span class="card-company">㈜케이콤</span></div><div class="card-work">초/중학교 홈페이지 구축 기획</div></div>
+        <div class="card-item"><span class="card-num">30</span><div class="card-top"><span class="card-proj">PC통신 나우누리 서비스 운영</span><span class="card-role-badge">기획</span></div><div class="card-meta"><span class="card-client">나우누리</span><span class="card-meta-sep"></span><span class="card-period">1996.02–1998.03</span><span class="card-meta-sep"></span><span class="card-company">㈜케이콤</span></div><div class="card-work">나우누리 서비스 운영 지원</div></div>
       </div>
     </section>
 
@@ -888,25 +723,27 @@
   </footer>
 
   <script>
-    // ── CURSOR ──────────────────────────────────────────────
-    const cursor = document.getElementById('cursor');
-    const ring   = document.getElementById('cursorRing');
-    let mx = 0, my = 0, rx = 0, ry = 0;
-    document.addEventListener('mousemove', e => {
-      mx = e.clientX; my = e.clientY;
-      cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
-    });
-    (function tick() {
-      rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
-      ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
-      requestAnimationFrame(tick);
-    })();
-    document.querySelectorAll('a, button').forEach(el => {
-      el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
-      el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
-    });
+    // ── CURSOR (desktop only) ─────────────────────────────
+    if (window.matchMedia('(pointer: fine)').matches) {
+      const cursor = document.getElementById('cursor');
+      const ring   = document.getElementById('cursorRing');
+      let mx = 0, my = 0, rx = 0, ry = 0;
+      document.addEventListener('mousemove', e => {
+        mx = e.clientX; my = e.clientY;
+        cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
+      });
+      (function tick() {
+        rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+        ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+        requestAnimationFrame(tick);
+      })();
+      document.querySelectorAll('a, button').forEach(el => {
+        el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+        el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+      });
+    }
 
-    // ── SCROLL REVEAL ────────────────────────────────────────
+    // ── SCROLL REVEAL ─────────────────────────────────────
     const observer = new IntersectionObserver(entries => {
       entries.forEach(e => {
         if (e.isIntersecting) {
@@ -914,8 +751,20 @@
           observer.unobserve(e.target);
         }
       });
-    }, { threshold: 0.08 });
+    }, { threshold: 0.06 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // ── MOBILE COLLAPSIBLE (초기 경력) ────────────────────
+    const earlySection = document.getElementById('early');
+    const earlyToggle  = document.getElementById('earlyToggle');
+    if (earlyToggle) {
+      earlyToggle.addEventListener('click', () => {
+        const isOpen = earlySection.classList.toggle('open');
+        earlyToggle.setAttribute('aria-expanded', isOpen);
+        earlyToggle.querySelector('.toggle-label').textContent =
+          isOpen ? '초기 경력 접기' : '초기 경력 30건 펼쳐보기';
+      });
+    }
   </script>
 
 </body>
