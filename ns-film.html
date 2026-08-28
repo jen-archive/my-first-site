@@ -4,6 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>N's Film — 인테리어 필름 시공 전문</title>
+<meta name="description" content="인테리어 필름 시공 전문 N's Film — 가구 리폼부터 주거·상업공간까지, 15년 노하우로 완성하는 공간 변화.">
+<meta name="theme-color" content="#0A0A0A">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="N's Film">
+<meta property="og:title" content="N's Film — 인테리어 필름 시공 전문">
+<meta property="og:description" content="가구 리폼부터 주거·상업공간까지, 15년 노하우로 완성하는 공간 변화.">
+<meta property="og:image" content="https://jen-archive.github.io/v1/og-image.png">
+<meta property="og:url" content="https://jen-archive.github.io/v1/ns-film">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="N's Film — 인테리어 필름 시공 전문">
+<meta name="twitter:description" content="가구 리폼부터 주거·상업공간까지, 15년 노하우로 완성하는 공간 변화.">
+<meta name="twitter:image" content="https://jen-archive.github.io/v1/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
@@ -72,12 +84,19 @@ nav.scrolled {
 }
 .nav-logo {
   font-family: var(--ff-display);
-  font-size: 22px; font-weight: 600;
-  letter-spacing: .04em; color: var(--c-black); line-height: 1;
+  font-size: 24px; font-weight: 600;
+  letter-spacing: .05em; color: var(--c-ivory); line-height: 1;
+  transition: color .4s;
 }
-.nav-logo em { color: var(--c-gold); font-style: italic; }
+nav.scrolled .nav-logo { color: var(--c-black); }
+.nav-logo em { color: var(--c-gold); font-style: italic; font-weight: 500; }
+.nav-logo .logo-film { font-style: italic; font-weight: 400; }
+.nav-logo-rule {
+  display: block; width: 20px; height: .5px;
+  background: var(--c-gold); margin: 8px 0 7px;
+}
 .nav-logo small {
-  display: block; margin-top: 4px;
+  display: block;
   font-family: var(--ff-body); font-size: 9px; font-weight: 300;
   letter-spacing: .24em; text-transform: uppercase; color: var(--c-stone);
 }
@@ -620,7 +639,7 @@ footer {
 }
 .nav-hamburger span {
   display: block; width: 22px; height: .5px;
-  background: var(--c-black); transition: all .35s;
+  background: var(--c-ivory); transition: all .35s;
 }
 nav.scrolled .nav-hamburger span { background: var(--c-black); }
 .nav-hamburger.open span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
@@ -825,7 +844,8 @@ nav.scrolled .nav-hamburger span { background: var(--c-black); }
 <!-- NAV -->
 <nav id="nf-nav">
   <div class="nav-logo">
-    N<em>'s</em> Film
+    N<em>'s</em> <span class="logo-film">Film</span>
+    <span class="nav-logo-rule" aria-hidden="true"></span>
     <small>Interior Film Specialist</small>
   </div>
   <div class="nav-links">
